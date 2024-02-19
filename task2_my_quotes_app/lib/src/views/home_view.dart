@@ -14,7 +14,7 @@ class QuotesHome extends StatelessWidget {
       body: Center(
         child: ElevatedButton(
           onPressed: () async{
-            await getBackroundImage();
+            await getRandomQuote();
           },
           child: const Text('getImage')
         ),
