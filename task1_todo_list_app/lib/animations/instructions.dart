@@ -22,23 +22,22 @@ class HomeViewInstructions extends StatefulWidget {
 
 class _HomeViewInstructionsState extends State<HomeViewInstructions>{
   late ScrollController controller;
+  late Timer timer;
 
   @override
   void initState(){
     super.initState();
     controller = ScrollController();
-    startAnimation();
+
+    timer = Timer.periodic(
+      const Duration(milliseconds: 100), 
+      (_) => controller.jumpTo(controller.offset + 1)
+    );
 
     controller.addListener(() {
       if(controller.offset >= controller.position.maxScrollExtent){
         controller.jumpTo(controller.initialScrollOffset);
       }
-    });
-  }
-
-  void startAnimation(){
-    Timer.periodic(const Duration(milliseconds: 100), (_) {
-      controller.jumpTo(controller.offset + 1);
     });
   }
 

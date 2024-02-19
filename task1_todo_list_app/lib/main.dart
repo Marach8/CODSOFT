@@ -101,8 +101,8 @@ class MyApp extends StatelessWidget {
             backgroundColor: blackColor,
           ),
           
-          useMaterial3: true,
-          brightness: Brightness.light
+          //useMaterial3: true,
+          //brightness: Brightness.light
         ),
         home: const BlocConsumerBase()
       ),
