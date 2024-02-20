@@ -20,9 +20,11 @@ class _BackgroundImageWithOverlayWidgetState extends State<BackgroundImageWithOv
   @override
   void initState(){
     super.initState();
-    loadingScreen.showOverlay(
-      widget.context1,
-      loadingString
+    WidgetsBinding.instance.addPostFrameCallback(
+      (_) => loadingScreen.showOverlay(
+        widget.context1,
+        loadingString
+      )
     );
   }
 
@@ -32,7 +34,7 @@ class _BackgroundImageWithOverlayWidgetState extends State<BackgroundImageWithOv
     super.dispose();
   }
 
-  
+
   @override
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
