@@ -24,15 +24,15 @@ class QuotesHome extends StatelessWidget {
           child: Column(
             mainAxisSize: MainAxisSize.max,
             children: [
-              FutureBuilder(
-                future: Future.wait([
+              FutureBuilder<dynamic>(
+                future: Future.wait<dynamic>([
                   getRandomImage(),
                   getRandomQuote()
                 ]),
                 builder: (_, snapshot){
                   if(snapshot.connectionState == ConnectionState.done){
-                    final imageSnapshot = snapshot.data?[0];
-                    final quotesSnaphot = snapshot.data?[1];
+                    final imageSnapshot = snapshot.data?.first;
+                    final quotesSnaphot = snapshot.data?.last;
 
                     if(imageSnapshot == null || quotesSnaphot == null){
                       return const FallBackWidget();
@@ -41,7 +41,7 @@ class QuotesHome extends StatelessWidget {
                     else{
                       return PictureAndQuoteWidget(
                         imageData: imageSnapshot as Uint8List,
-                        qoutesText: quotesSnaphot as String,
+                        quotesText: quotesSnaphot as String,
                       );
                     }
                   }
