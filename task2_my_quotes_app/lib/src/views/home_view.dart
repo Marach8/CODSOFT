@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart' show SystemUiOverlayStyle;
-import 'package:gap/gap.dart';
 import 'package:task2_my_quotes_app/src/functions/get_api.dart';
 import 'package:task2_my_quotes_app/src/utils/colors.dart';
+import 'package:task2_my_quotes_app/src/utils/strings.dart';
+import 'package:task2_my_quotes_app/src/widgets/background_image_widget.dart';
 
 class QuotesHome extends StatelessWidget {
   const QuotesHome({super.key});
@@ -11,6 +12,7 @@ class QuotesHome extends StatelessWidget {
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
     final screenHeight = MediaQuery.of(context).size.height;
+
     return AnnotatedRegion<SystemUiOverlayStyle>(
       value: SystemUiOverlayStyle(
         statusBarColor: transparentColor,
@@ -26,16 +28,23 @@ class QuotesHome extends StatelessWidget {
                 builder: (_, snapshot){
                   if(snapshot.connectionState == ConnectionState.done){
                     return Expanded(
-                      child: Image.memory(
-                        snapshot.data,
-                        height: screenHeight,
-                        width: screenWidth,
-                        fit: BoxFit.cover
-                      )
+                      child: snapshot.hasData ? 
+                        Image.memory(
+                          snapshot.data,
+                          height: screenHeight,
+                          width: screenWidth,
+                          fit: BoxFit.cover
+                        ):
+                        Image.asset(
+                          imageFilePath,
+                          height: screenHeight,
+                          width: screenWidth,
+                          fit: BoxFit.cover
+                        )
                     );
                   }
                   else{
-                    return const CircularProgressIndicator();
+                    return BackgroundImageWithOverlayWidget(context1: context,);
                   }
                 }
               ),
