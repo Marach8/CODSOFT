@@ -43,9 +43,9 @@ class _BackgroundImageWithOverlayWidgetState extends State<BackgroundImageWithOv
     return Expanded(
       child: Image.asset(
         imageFilePath,
-          height: screenHeight,
-          width: screenWidth,
-          fit: BoxFit.cover
+        height: screenHeight,
+        width: screenWidth,
+        fit: BoxFit.cover
       ),
     );
   }

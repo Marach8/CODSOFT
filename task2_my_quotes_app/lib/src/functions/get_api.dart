@@ -18,14 +18,16 @@ Future<dynamic> getRandomImage() async{
 }
 
 
-Future<void> getRandomQuote() async{
+Future<String> getRandomQuote() async{
   final response = await http.get(
     Uri.parse(quotesUrl),
     headers: {apiKey: apiKeyValue}
   );
   if(response.statusCode == 200){
     final data = jsonDecode(response.body);
-    // print(data[0]['quote']);
+    return data[0]['quote'];
   }
-  else{}
+  else{
+    return 'Hello';
+  }
 }
