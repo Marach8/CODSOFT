@@ -10,3 +10,4 @@ const quickSandFont = 'Quicksand';
 const loadingString = 'Loading New Quote...';
 const noQuotes = 'Unable to fetch quotes!😢. Please check your internet connection...';
 const quotesKey = 'quote';
+const lengthOfQuotes = 'quotesLength';
