@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart' show SystemUiOverlayStyle;
 import 'package:gap/gap.dart';
 import 'package:task2_my_quotes_app/src/functions/get_api.dart';
+import 'package:task2_my_quotes_app/src/utils/colors.dart';
 
 class QuotesHome extends StatelessWidget {
   const QuotesHome({super.key});
@@ -12,13 +13,10 @@ class QuotesHome extends StatelessWidget {
     final screenHeight = MediaQuery.of(context).size.height;
     return AnnotatedRegion<SystemUiOverlayStyle>(
       value: SystemUiOverlayStyle(
-        systemNavigationBarColor: Colors.yellow.withOpacity(0.000005)
+        statusBarColor: transparentColor,
+        systemNavigationBarColor: tealColorWithOpacity
       ),
       child: Scaffold(
-        // appBar: AppBar(
-        //   title: const Text('My Quotes App'),
-        //   centerTitle: true,
-        // ),
         body: Center(
           child: Column(
             mainAxisSize: MainAxisSize.max,
@@ -41,16 +39,20 @@ class QuotesHome extends StatelessWidget {
                   }
                 }
               ),
-              // const Gap(10),
-              // ElevatedButton(
-              //   onPressed: () async{
-              //     await getRandomImage();
-              //   },
-              //   child: const Text('getImage')
-              // ),
             ],
           ),
-        )
+        ),
+        bottomNavigationBar: Row(
+          children: [
+              ElevatedButton(
+                onPressed: () async{
+                  await getRandomImage();
+                },
+                child: const Text('getImage')
+              ),
+          ],
+        ),
+        backgroundColor: tealColorWithOpacity,
       ),
     );
   }
