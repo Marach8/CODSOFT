@@ -67,7 +67,7 @@ class LoadingScreen{
                     const CircularProgressIndicator(
                       color: whiteColor
                     ),
-                    const Gap(15),
+                    const Gap(20),
                     StreamBuilder(
                       stream: textStream.stream,
                       builder: (_, snapshot){
@@ -82,7 +82,8 @@ class LoadingScreen{
                           return const SizedBox.shrink();
                         }
                       }
-                    )
+                    ),
+                    const Gap(10)
                   ],
                 ),
               ),

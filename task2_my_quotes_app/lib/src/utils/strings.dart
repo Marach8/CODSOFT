@@ -7,6 +7,6 @@ const acceptKey = 'Accept';
 const acceptKeyValue = 'image/jpg';
 const imageFilePath = 'assets/FB_IMG_1691828515571.png';
 const quickSandFont = 'Quicksand';
-const loadingString = 'Loading...';
+const loadingString = 'Loading New Quote...';
 const noQuotes = 'Unable to fetch quotes!😢. Please check your internet connection...';
 const quotesKey = 'quote';

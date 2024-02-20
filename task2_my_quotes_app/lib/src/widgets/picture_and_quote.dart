@@ -1,9 +1,6 @@
 import 'package:flutter/foundation.dart' show Uint8List;
 import 'package:flutter/material.dart';
-import 'package:task2_my_quotes_app/src/utils/colors.dart';
-import 'package:task2_my_quotes_app/src/utils/extensions.dart';
-import 'package:task2_my_quotes_app/src/utils/fontsizes.dart';
-import 'package:task2_my_quotes_app/src/utils/fontweights.dart';
+import 'package:task2_my_quotes_app/src/widgets/custom_center_text.dart';
 
 class PictureAndQuoteWidget extends StatelessWidget {
   final Uint8List imageData;
@@ -29,16 +26,7 @@ class PictureAndQuoteWidget extends StatelessWidget {
             width: screenWidth,
             fit: BoxFit.cover
           ),
-          Center(
-            child: Padding(
-              padding: const EdgeInsets.all(20.0),
-              child: Text(quotesText).decorateWithGoogleFont(
-                whiteColor, 
-                fontWeight4, 
-                fontSize4
-              ),
-            )
-          )
+          CustomCenterTextWidget(text: quotesText)
         ],
       )
     );

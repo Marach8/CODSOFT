@@ -2,7 +2,6 @@ import 'dart:convert';
 import 'package:flutter/services.dart' show Uint8List;
 import 'package:http/http.dart' as http;
 import 'package:task2_my_quotes_app/src/utils/strings.dart';
-import 'dart:developer' as marach show log;
 
 
 Future<Uint8List?> getRandomImage() async{
@@ -29,7 +28,7 @@ Future<String?> getRandomQuote() async{
     Uri.parse(quotesUrl),
     headers: {apiKey: apiKeyValue}
   );
-  
+
   if(response.statusCode == 200){
     final data = jsonDecode(response.body);
     return data[0][quotesKey];
