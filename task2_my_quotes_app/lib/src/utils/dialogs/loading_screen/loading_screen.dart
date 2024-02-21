@@ -5,7 +5,7 @@ import 'package:task2_my_quotes_app/src/utils/colors.dart';
 import 'package:task2_my_quotes_app/src/utils/extensions.dart';
 import 'package:task2_my_quotes_app/src/utils/fontsizes.dart';
 import 'package:task2_my_quotes_app/src/utils/fontweights.dart';
-import 'package:task2_my_quotes_app/src/utils/loading_screen/loading_screen_controller.dart';
+import 'package:task2_my_quotes_app/src/utils/dialogs/loading_screen/loading_screen_controller.dart';
 
 
 class LoadingScreen{
@@ -44,7 +44,7 @@ class LoadingScreen{
     
     final overlay = OverlayEntry(
       builder: (_) => Material(
-        color: blackColor.withAlpha(200),
+        color: blackColor.withAlpha(150),
         child: Center(
           child: Container(
             constraints: BoxConstraints(

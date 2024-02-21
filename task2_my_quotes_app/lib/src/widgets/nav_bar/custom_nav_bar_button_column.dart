@@ -9,12 +9,14 @@ class NavBarButtonColumn extends StatelessWidget {
   final IconData icon;
   final void Function() function;
   final String title;
+  final bool? activateButtons;
 
   const NavBarButtonColumn({
     super.key,
     required this.icon,
     required this.function,
-    required this.title
+    required this.title,
+    this.activateButtons
   });
 
   @override
@@ -23,9 +25,10 @@ class NavBarButtonColumn extends StatelessWidget {
       mainAxisSize: MainAxisSize.min,
       children: [
         IconButton.outlined(
-          onPressed: function, 
+          onPressed: activateButtons ?? false ? function : null, 
           icon: FaIcon(icon),
           color: whiteColor,
+          disabledColor: disabledButtonColor,
         ),
         Text(title).decorateWithGoogleFont(
           whiteColor, 
