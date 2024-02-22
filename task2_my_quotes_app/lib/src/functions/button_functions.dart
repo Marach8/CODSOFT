@@ -31,3 +31,7 @@ Future<void> saveQuote({
   });
 }
 
+
+// Future<Iterable<List<String>?>> getFavouriteQuotes() async {
+//   await showGene
+// }
