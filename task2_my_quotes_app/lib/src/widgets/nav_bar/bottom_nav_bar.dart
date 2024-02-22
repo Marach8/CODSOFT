@@ -39,7 +39,7 @@ class BottomNavButtons extends StatelessWidget {
         NavBarButtonColumn(
           activateButtons: activateButtons,
           icon: FontAwesomeIcons.bookOpenReader, 
-          function: () {},
+          function: () => Scaffold.of(context).openDrawer(),
           title: 'View Favorites'
         )
       ],

@@ -18,3 +18,4 @@ const saveQuoteKey = 'SaveQuote';
 const shareQuoteKey = 'ShareQuote';
 const saving = 'Saving...';
 const saved = 'Saved🎉';
+const noSavedQuotes = 'Oops! You currently have no saved quotes to display...';

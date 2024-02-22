@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:task2_my_quotes_app/src/functions/database.dart';
 import 'package:task2_my_quotes_app/src/utils/dialogs/flushbar.dart';
 import 'package:task2_my_quotes_app/src/utils/dialogs/generic_dialog.dart';
@@ -30,8 +31,3 @@ Future<void> saveQuote({
     }
   });
 }
-
-
-// Future<Iterable<List<String>?>> getFavouriteQuotes() async {
-//   await showGene
-// }

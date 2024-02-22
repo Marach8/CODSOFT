@@ -25,7 +25,7 @@ class NavBarButtonColumn extends StatelessWidget {
       mainAxisSize: MainAxisSize.min,
       children: [
         IconButton.outlined(
-          onPressed: activateButtons ?? false ? function : null, 
+          onPressed: activateButtons ?? true ? function : null, 
           icon: FaIcon(icon),
           color: whiteColor,
           disabledColor: disabledButtonColor,
