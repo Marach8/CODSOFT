@@ -44,6 +44,7 @@ class LocalDatabase{
           currentNumberOfSaveQuotes, 
           (index) => prefs.getStringList((index+1).toString())
         );
+        print(savedQuotes.toString());
         return savedQuotes;
       }
     );

@@ -5,23 +5,35 @@ import 'package:task2_my_quotes_app/src/utils/extensions.dart';
 import 'package:task2_my_quotes_app/src/utils/fontsizes.dart';
 import 'package:task2_my_quotes_app/src/utils/fontweights.dart';
 import 'package:task2_my_quotes_app/src/utils/strings.dart';
+import 'dart:developer' as marach show log;
 
 class SavedQuotes extends StatelessWidget {
   const SavedQuotes({super.key});
 
   @override
   Widget build(BuildContext context) {
+
     final database = LocalDatabase();
+    // return Center(
+    //   child: const Text(noSavedQuotes).decorateWithGoogleFont(
+    //     whiteColor, 
+    //     fontWeight2, 
+    //     fontSize3
+    //   ),
+    // );
 
     return FutureBuilder<Iterable<List<String>?>>(
       future: database.getQuoteItems(),
-      builder: (_, snapshot) {
+      builder: (context, snapshot) {
+        marach.log('I am here');
         if(snapshot.connectionState == ConnectionState.done){
           if(snapshot.hasData){
+            print('There is data');
             return ListView.builder(
               itemCount: snapshot.data!.length,
-              itemBuilder: (_, listIndex){
-                return const Text('Hello dear');
+              itemBuilder: (context, listIndex){
+                print('Inside the listView.builder');
+                return const Center(child: Text('Hello dear'));
               }
             );
           }
