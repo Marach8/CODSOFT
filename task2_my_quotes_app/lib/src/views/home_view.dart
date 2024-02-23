@@ -8,8 +8,16 @@ import 'package:task2_my_quotes_app/src/widgets/fallback_widget.dart';
 import 'package:task2_my_quotes_app/src/widgets/loading_screen_widget.dart';
 import 'package:task2_my_quotes_app/src/widgets/picture_and_quote.dart';
 
-class QuotesHome extends StatelessWidget {
+class QuotesHome extends StatefulWidget {
   const QuotesHome({super.key});
+
+  @override
+  State<QuotesHome> createState() => _QuotesHomeState();
+}
+
+class _QuotesHomeState extends State<QuotesHome> {
+  
+  void refresh() => setState((){});
 
   @override
   Widget build(BuildContext context) {
@@ -61,7 +69,9 @@ class QuotesHome extends StatelessWidget {
           child: const SavedQuotes(),
           
         ),
-        bottomNavigationBar: const BottomNavButtons(),
+        bottomNavigationBar: BottomNavButtons(
+          refresh: () => refresh()
+        ),
         backgroundColor: blackColor.withAlpha(10)
       ),
     );
