@@ -5,7 +5,7 @@ import 'package:task2_my_quotes_app/src/utils/fontsizes.dart';
 import 'package:task2_my_quotes_app/src/utils/fontweights.dart';
 
 class ListTileLeadingWidget extends StatelessWidget {
-  final int listIndex;
+  final String listIndex;
 
   const ListTileLeadingWidget({
     super.key,
@@ -27,7 +27,7 @@ class ListTileLeadingWidget extends StatelessWidget {
           )
         ),
         child: Center(
-          child: Text(listIndex.toString()).decorateWithGoogleFont(
+          child: Text(listIndex).decorateWithGoogleFont(
             whiteColor,
             fontWeight9,
             fontSize1

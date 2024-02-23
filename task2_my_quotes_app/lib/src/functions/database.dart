@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:task2_my_quotes_app/src/utils/strings.dart';
 
@@ -59,4 +61,10 @@ class LocalDatabase{
         return savedQuotes;
       }
     );
+
+
+    Future<bool> deleteQuote(String keyToDelete) async => 
+      await preferences().then(
+        (prefs) => prefs.remove(keyToDelete)
+      );
 }

@@ -28,7 +28,6 @@ class NavBarButtonColumn extends StatelessWidget {
           onPressed: activateButtons ?? true ? function : null, 
           icon: FaIcon(icon),
           color: whiteColor,
-          disabledColor: disabledButtonColor,
         ),
         Text(title).decorateWithGoogleFont(
           whiteColor, 

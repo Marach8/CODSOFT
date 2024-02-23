@@ -19,25 +19,21 @@ class BottomNavButtons extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
         NavBarButtonColumn(
-          //activateButtons: activateButtons,
           icon: FontAwesomeIcons.download, 
           function: () async => await saveQuote(context: context),
           title: saveQuoteTitle
         ),
         NavBarButtonColumn(
-          //activateButtons: activateButtons,
           icon: FontAwesomeIcons.arrowRotateRight, 
           function: refresh,
           title: refreshQuote
         ),
         NavBarButtonColumn(
-          //activateButtons: activateButtons,
           icon: FontAwesomeIcons.share, 
           function: () {},
           title: shareQuote
         ),
         NavBarButtonColumn(
-          //activateButtons: activateButtons,
           icon: FontAwesomeIcons.bookOpenReader, 
           function: () => Scaffold.of(context).openDrawer(),
           title: viewFavorites

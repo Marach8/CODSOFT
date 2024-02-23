@@ -9,3 +9,8 @@ final shareQuoteMap = {
   cancel: false,
   shareQuoteKey: true
 };
+
+final deleteQuoteMap = {
+  cancel: false,
+  deleteQuoteKey: true
+};

@@ -1,11 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:task2_my_quotes_app/src/functions/database.dart';
 import 'package:task2_my_quotes_app/src/utils/colors.dart';
+import 'package:task2_my_quotes_app/src/utils/dialogs/flushbar.dart';
+import 'package:task2_my_quotes_app/src/utils/dialogs/generic_dialog.dart';
 import 'package:task2_my_quotes_app/src/utils/extensions.dart';
 import 'package:task2_my_quotes_app/src/utils/fontsizes.dart';
 import 'package:task2_my_quotes_app/src/utils/fontweights.dart';
+import 'package:task2_my_quotes_app/src/utils/maps.dart';
 import 'package:task2_my_quotes_app/src/utils/strings.dart';
 import 'package:task2_my_quotes_app/src/views/list_tile_leading_widget.dart';
+import 'package:task2_my_quotes_app/src/widgets/dismissible_background.dart';
+
 
 class SavedQuotes extends StatelessWidget {
   const SavedQuotes({super.key});
@@ -29,30 +34,54 @@ class SavedQuotes extends StatelessWidget {
             builder: (context, snapshot) {
               if(snapshot.connectionState == ConnectionState.done){
                 if(snapshot.hasData && snapshot.data!.isNotEmpty){
+                  final indexedIterable = snapshot.data!.indexed;
                   return ListView(
-                    children: snapshot.data!.map(
-                      (quoteItem) => Card(
-                        margin: const EdgeInsets.fromLTRB(10, 3, 10, 3),
-                        color: whiteColor.withOpacity(0.2),
-                        child: ListTile(
-                          minLeadingWidth: 0,
-                          leading: ListTileLeadingWidget(
-                            listIndex: int.parse(quoteItem!.last)
-                          ),
-                          title: Text(quoteItem.first).decorateWithGoogleFont(
-                            whiteColor, 
-                            fontWeight3,
-                            fontSize2,
-                          ),
-                          
-                          subtitle: Padding(
-                            padding: const EdgeInsets.only(top:3),
-                            child: Text(
-                              dashString + quoteItem[1] + dashString
-                            ).decorateWithGoogleFont(
+                    children: indexedIterable.map(
+                      (quoteItem) => Dismissible(
+                        key: UniqueKey(),
+                        confirmDismiss: (_) async {
+                          return showGenericDialog<bool>(
+                            context: context, 
+                            title: deleteQuote, 
+                            content: confirmDeleteQuote, 
+                            options: deleteQuoteMap
+                          );
+                        },
+                        onDismissed: (direction) async{
+                          if(
+                            direction == DismissDirection.endToStart || 
+                            direction == DismissDirection.startToEnd
+                          ){
+                            await database.deleteQuote(quoteItem.$2!.last)
+                              .then((_)async{
+                                await showFlushbar(context, quoteDeleted);
+                              });
+                          }
+                        },
+                        background: const BackgroundOfDissmissible(),
+                        child: Card(
+                          margin: const EdgeInsets.fromLTRB(10, 3, 10, 3),
+                          color: whiteColor.withOpacity(0.2),
+                          child: ListTile(
+                            minLeadingWidth: 0,
+                            leading: ListTileLeadingWidget(
+                              listIndex: (quoteItem.$1 + 1).toString()
+                            ),
+                            title: Text(quoteItem.$2!.first).decorateWithGoogleFont(
                               whiteColor, 
-                              fontWeight7,
-                              fontSize1,
+                              fontWeight3,
+                              fontSize2,
+                            ),
+                            
+                            subtitle: Padding(
+                              padding: const EdgeInsets.only(top:3),
+                              child: Text(
+                                dashString + quoteItem.$2![1] + dashString
+                              ).decorateWithGoogleFont(
+                                whiteColor, 
+                                fontWeight7,
+                                fontSize1,
+                              ),
                             ),
                           ),
                         ),
