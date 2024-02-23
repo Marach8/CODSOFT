@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:task2_my_quotes_app/src/utils/colors.dart';
+import 'package:task2_my_quotes_app/src/utils/extensions.dart';
+import 'package:task2_my_quotes_app/src/utils/fontsizes.dart';
+import 'package:task2_my_quotes_app/src/utils/fontweights.dart';
 import 'package:task2_my_quotes_app/src/utils/strings.dart';
-import 'package:task2_my_quotes_app/src/widgets/custom_center_text.dart';
 
 class FallBackWidget extends StatelessWidget {
   const FallBackWidget({super.key});
@@ -19,7 +22,16 @@ class FallBackWidget extends StatelessWidget {
             width: screenWidth,
             fit: BoxFit.cover
           ),
-          const CustomCenterTextWidget(text: noQuotes)
+          Padding(
+            padding: const EdgeInsets.all(20),
+            child: Center(
+              child: const Text(noQuotes).decorateWithGoogleFont(
+                whiteColor,
+                fontWeight4,
+                fontSize5
+              ),
+            ),
+          )
         ],
       ),
     );

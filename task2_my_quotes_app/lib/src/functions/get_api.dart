@@ -24,7 +24,7 @@ Future<Uint8List?> getRandomImage() async{
 }
 
 
-Future<String?> getRandomQuote() async{
+Future<List<String>?> getRandomQuote() async{
   try{
     final response = await http.get(
       Uri.parse(quotesUrl),
@@ -34,14 +34,15 @@ Future<String?> getRandomQuote() async{
     if(response.statusCode == 200){
       final data = jsonDecode(response.body);
       final quote = data[0][quotesKey];
-      await LocalDatabase().setTemporaryQuote(quote);
-      return quote;
+      final author = data[0][authorKey];
+      await LocalDatabase().setTemporaryQuote([quote, author]);
+      return [quote, author];
     }
     return null;
   }
 
   catch (_){
-    await LocalDatabase().setTemporaryQuote(emptyString);
+    await LocalDatabase().setTemporaryQuote([]);
     return null;
   }
 }

@@ -15,7 +15,7 @@ Future<void> saveQuote({
 }) async {
   await database.getTemporaryQuote().then(
     (quote) async{
-      if(quote != null && quote.isNotEmpty){
+      if(quote!.isNotEmpty){
         await showGenericDialog<bool>(
           context: context, 
           title: saveQuoteTitle, 
@@ -25,11 +25,25 @@ Future<void> saveQuote({
         .then((result) async{
           if(result ?? false){
             loadingScreen.showOverlay(context, saving);
-            await database.setQuoteItem(quote).then(
-              (_) async{
+            final savedQuotes = await database.getQuoteItems();
+            final quoteDoesNotExistInitially = savedQuotes.every(
+              (savedQuote) => savedQuote!.first != quote.first
+            );
+            if(quoteDoesNotExistInitially){
+                await database.setQuoteItem(quote).then(
+                (_) async{
+                  loadingScreen.hideOverlay();
+                  await showFlushbar(context, saved);
+              });
+            }
+
+            else{
               loadingScreen.hideOverlay();
-              await showFlushbar(context, saved);
-            });
+              await Future.delayed(Duration.zero).then(
+                (_) async => await showFlushbar(context, quoteExists)
+              );
+            }
+            
           }
         });
       }

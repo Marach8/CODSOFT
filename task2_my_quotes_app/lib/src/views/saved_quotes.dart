@@ -18,7 +18,7 @@ class SavedQuotes extends StatelessWidget {
       future: database.getQuoteItems(),
       builder: (context, snapshot) {
         if(snapshot.connectionState == ConnectionState.done){
-          if(snapshot.hasData){
+          if(snapshot.hasData && snapshot.data!.isNotEmpty){
             return ListView(
               children: snapshot.data!.map(
                 (quoteItem) => Card(
@@ -34,6 +34,15 @@ class SavedQuotes extends StatelessWidget {
                       fontWeight3,
                       fontSize2,
                     ),
+                    
+                    subtitle: Padding(
+                      padding: const EdgeInsets.only(top:3),
+                      child: Text(dashString + quoteItem[1]).decorateWithGoogleFont(
+                        whiteColor, 
+                        fontWeight7,
+                        fontSize1,
+                      ),
+                    ),
                   ),
                 )
               ).toList()
@@ -41,11 +50,14 @@ class SavedQuotes extends StatelessWidget {
           }
 
           else{
-            return Center(
-              child: const Text(noSavedQuotes).decorateWithGoogleFont(
-                whiteColor, 
-                fontWeight2, 
-                fontSize3
+            return Padding(
+              padding: const EdgeInsets.all(20),
+              child: Center(
+                child: const Text(noSavedQuotes).decorateWithGoogleFont(
+                  whiteColor, 
+                  fontWeight2, 
+                  fontSize3
+                ),
               ),
             );
           }

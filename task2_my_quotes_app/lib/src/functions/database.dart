@@ -10,38 +10,38 @@ class LocalDatabase{
   Future<SharedPreferences> preferences() async
     => await SharedPreferences.getInstance();
 
-  Future<bool> setTemporaryQuote(String tempQuote) async 
+  Future<bool> setTemporaryQuote(List<String> tempQuote) async 
     => await preferences().then(
-      (prefs) => prefs.setString(tempQuoteString, tempQuote)
+      (prefs) => prefs.setStringList(tempQuoteString, tempQuote)
     );
 
 
-  Future<String?> getTemporaryQuote() async 
+  Future<List<String>?> getTemporaryQuote() async 
     => await preferences().then(
-      (prefs) => prefs.getString(tempQuoteString)
+      (prefs) => prefs.getStringList(tempQuoteString)
     );
  
 
-  Future<bool> setNumberOfSavedQuotes(int numberOfQuotes) async 
+  Future<bool> _setNumberOfSavedQuotes(int numberOfQuotes) async 
     => await preferences().then(
       (prefs) => prefs.setInt(lengthOfQuotes, numberOfQuotes)
     );
 
 
-  Future<int?> getNumberOfSavedQuotes() async 
+  Future<int?> _getNumberOfSavedQuotes() async 
     => await preferences().then(
       (prefs) => prefs.getInt(lengthOfQuotes)
     );
 
 
-  Future<bool> setQuoteItem(String quoteItem) async 
+  Future<bool> setQuoteItem(List<String> quoteList) async 
     => await preferences().then(
       (prefs) async{
-        final numberOfQuotes = await getNumberOfSavedQuotes() ?? 0;
+        final numberOfQuotes = await _getNumberOfSavedQuotes() ?? 0;
         final newNumberOfQuotes = numberOfQuotes + 1;
-        final quoteList = [quoteItem, newNumberOfQuotes.toString()];
+        quoteList.add(newNumberOfQuotes.toString());
         await prefs.setStringList(newNumberOfQuotes.toString(), quoteList);
-        await setNumberOfSavedQuotes(newNumberOfQuotes);
+        await _setNumberOfSavedQuotes(newNumberOfQuotes);
         return true;
       }
     );
@@ -50,9 +50,9 @@ class LocalDatabase{
   Future<Iterable<List<String>?>> getQuoteItems() async 
     => await preferences().then(
       (prefs) async{
-        final currentNumberOfSaveQuotes = await getNumberOfSavedQuotes() ?? 0;
+        final numberOfSavedQuotes = await _getNumberOfSavedQuotes() ?? 0;
         final savedQuotes = Iterable.generate(
-          currentNumberOfSaveQuotes, 
+          numberOfSavedQuotes, 
           (index) => prefs.getStringList((index+1).toString())
         )
         .where((quote) => quote != null);
