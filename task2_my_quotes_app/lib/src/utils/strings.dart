@@ -13,6 +13,7 @@ const quotesKey = 'quote';
 const authorKey = 'author';
 const lengthOfQuotes = 'quotesLength';
 const saveQuoteTitle = 'Save Quote';
+const favoriteQuotes = 'Your Favorite Quotes.';
 const saveQuoteContent = 'Proceed to add this quote to your Favorites?';
 const cancel = 'Cancel';
 const saveQuoteKey = 'Add';

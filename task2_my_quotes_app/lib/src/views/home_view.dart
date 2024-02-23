@@ -41,7 +41,7 @@ class QuotesHome extends StatelessWidget {
                     else{
                       return PictureAndQuoteWidget(
                         imageData: imageSnapshot as Uint8List,
-                        quoteList: quotesSnaphot,
+                        quoteList: quotesSnaphot as List<String>,
                       );
                     }
                   }

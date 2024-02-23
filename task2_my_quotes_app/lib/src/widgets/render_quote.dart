@@ -29,7 +29,7 @@ class QuoteRenderWidget extends StatelessWidget {
                 fontSize5
               ),
               const Gap(10),
-              Text(dashString + quoteList.last).decorateWithGoogleFont(
+              Text(dashString + quoteList.last + dashString).decorateWithGoogleFont(
                 whiteColor, 
                 fontWeight7, 
                 fontSize3
