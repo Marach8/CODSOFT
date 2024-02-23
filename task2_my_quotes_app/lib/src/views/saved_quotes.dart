@@ -19,15 +19,17 @@ class SavedQuotes extends StatelessWidget {
       builder: (context, snapshot) {
         if(snapshot.connectionState == ConnectionState.done){
           if(snapshot.hasData){
-            final List<List<String>?> data = snapshot.data!.toList();
             return ListView(
               children: snapshot.data!.map(
                 (quoteItem) => Card(
                   margin: const EdgeInsets.fromLTRB(10, 3, 10, 3),
                   color: whiteColor.withOpacity(0.2),
                   child: ListTile(
-                    leading: ListTileLeadingWidget(data.indexOf(quoteItem)),
-                    title: Text(quoteItem![0]).decorateWithGoogleFont(
+                    minLeadingWidth: 0,
+                    leading: ListTileLeadingWidget(
+                      listIndex: int.parse(quoteItem!.last)
+                    ),
+                    title: Text(quoteItem.first).decorateWithGoogleFont(
                       whiteColor, 
                       fontWeight3,
                       fontSize2,

@@ -26,10 +26,12 @@ class ListTileLeadingWidget extends StatelessWidget {
             width: 0.5,
           )
         ),
-        child: Text(listIndex.toString()).decorateWithGoogleFont(
-          whiteColor,
-          fontWeight9,
-          fontSize1
+        child: Center(
+          child: Text(listIndex.toString()).decorateWithGoogleFont(
+            whiteColor,
+            fontWeight9,
+            fontSize1
+          ),
         )
       ),
     );
