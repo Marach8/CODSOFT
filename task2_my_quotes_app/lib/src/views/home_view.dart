@@ -68,10 +68,7 @@ class QuotesHome extends StatelessWidget {
           child: SavedQuotes(),
           
         ),
-        bottomNavigationBar: BottomNavButtons(
-          quote: quote,
-          activateButtons: activateButtons,
-        ),
+        bottomNavigationBar: const BottomNavButtons(),
         backgroundColor: blackColor.withAlpha(10)
       ),
     );

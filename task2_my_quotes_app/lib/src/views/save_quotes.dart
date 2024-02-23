@@ -12,15 +12,8 @@ class SavedQuotes extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     final database = LocalDatabase();
-    // return Center(
-    //   child: const Text(noSavedQuotes).decorateWithGoogleFont(
-    //     whiteColor, 
-    //     fontWeight2, 
-    //     fontSize3
-    //   ),
-    // );
+    
 
     return FutureBuilder<Iterable<List<String>?>>(
       future: database.getQuoteItems(),
@@ -29,13 +22,21 @@ class SavedQuotes extends StatelessWidget {
         if(snapshot.connectionState == ConnectionState.done){
           if(snapshot.hasData){
             print('There is data');
-            return ListView.builder(
-              itemCount: snapshot.data!.length,
-              itemBuilder: (context, listIndex){
-                print('Inside the listView.builder');
-                return const Center(child: Text('Hello dear'));
-              }
+            // return ListView.builder(
+            //   itemCount: snapshot.data!.length,
+            //   itemBuilder: (context, listIndex){
+            //     print('Inside the listView.builder');
+            //     return const Center(child: Text('Hello dear'));
+            //   }
+            // );
+            return Center(
+              child: const Text(noSavedQuotes).decorateWithGoogleFont(
+                whiteColor, 
+                fontWeight2, 
+                fontSize3
+              )
             );
+
           }
 
           else{

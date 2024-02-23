@@ -9,6 +9,17 @@ class LocalDatabase{
 
   Future<SharedPreferences> preferences() async
     => await SharedPreferences.getInstance();
+
+  Future<bool> setTemporaryQuote(String tempQuote) async 
+    => await preferences().then(
+      (prefs) => prefs.setString(tempQuoteString, tempQuote)
+    );
+
+
+  Future<String?> getTemporaryQuote(String tempQuote) async 
+    => await preferences().then(
+      (prefs) => prefs.getString(tempQuoteString)
+    );
  
 
   Future<bool> setNumberOfSavedQuotes(int numberOfQuotes) async 
@@ -43,7 +54,8 @@ class LocalDatabase{
         final savedQuotes = Iterable.generate(
           currentNumberOfSaveQuotes, 
           (index) => prefs.getStringList((index+1).toString())
-        );
+        )
+        .where((quote) => quote != null);
         print(savedQuotes.toString());
         return savedQuotes;
       }
