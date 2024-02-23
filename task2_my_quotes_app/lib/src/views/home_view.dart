@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart' show SystemUiOverlayStyle, Uint8List;
 import 'package:task2_my_quotes_app/src/functions/get_api.dart';
 import 'package:task2_my_quotes_app/src/utils/colors.dart';
-import 'package:task2_my_quotes_app/src/views/save_quotes.dart';
+import 'package:task2_my_quotes_app/src/views/saved_quotes.dart';
 import 'package:task2_my_quotes_app/src/widgets/nav_bar/bottom_nav_bar.dart';
 import 'package:task2_my_quotes_app/src/widgets/fallback_widget.dart';
 import 'package:task2_my_quotes_app/src/widgets/loading_screen_widget.dart';
@@ -56,9 +56,9 @@ class QuotesHome extends StatelessWidget {
             ],
           ),
         ),
-        drawer: const Drawer(
-          backgroundColor: blackColor,
-          child: SavedQuotes(),
+        drawer: Drawer(
+          backgroundColor: blackColor.withAlpha(150),
+          child: const SavedQuotes(),
           
         ),
         bottomNavigationBar: const BottomNavButtons(),

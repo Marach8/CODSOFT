@@ -5,7 +5,7 @@ import 'package:task2_my_quotes_app/src/utils/extensions.dart';
 import 'package:task2_my_quotes_app/src/utils/fontsizes.dart';
 import 'package:task2_my_quotes_app/src/utils/fontweights.dart';
 import 'package:task2_my_quotes_app/src/utils/strings.dart';
-import 'dart:developer' as marach show log;
+import 'package:task2_my_quotes_app/src/views/list_tile_leading_widget.dart';
 
 class SavedQuotes extends StatelessWidget {
   const SavedQuotes({super.key});
@@ -14,23 +14,28 @@ class SavedQuotes extends StatelessWidget {
   Widget build(BuildContext context) {
     final database = LocalDatabase();
     
-
     return FutureBuilder<Iterable<List<String>?>>(
       future: database.getQuoteItems(),
       builder: (context, snapshot) {
-        marach.log('I am here');
         if(snapshot.connectionState == ConnectionState.done){
           if(snapshot.hasData){
-            print('There is data');
-            print(snapshot.data);
-            return Center(
-              child: const Text(noSavedQuotes).decorateWithGoogleFont(
-                whiteColor, 
-                fontWeight2, 
-                fontSize3
-              )
+            final List<List<String>?> data = snapshot.data!.toList();
+            return ListView(
+              children: snapshot.data!.map(
+                (quoteItem) => Card(
+                  margin: const EdgeInsets.fromLTRB(10, 3, 10, 3),
+                  color: whiteColor.withOpacity(0.2),
+                  child: ListTile(
+                    leading: ListTileLeadingWidget(data.indexOf(quoteItem)),
+                    title: Text(quoteItem![0]).decorateWithGoogleFont(
+                      whiteColor, 
+                      fontWeight3,
+                      fontSize2,
+                    ),
+                  ),
+                )
+              ).toList()
             );
-
           }
 
           else{
@@ -55,3 +60,6 @@ class SavedQuotes extends StatelessWidget {
     );
   }
 }
+
+
+

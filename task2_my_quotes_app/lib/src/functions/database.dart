@@ -56,7 +56,6 @@ class LocalDatabase{
           (index) => prefs.getStringList((index+1).toString())
         )
         .where((quote) => quote != null);
-        print(savedQuotes.toString());
         return savedQuotes;
       }
     );
