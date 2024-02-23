@@ -16,7 +16,7 @@ class LocalDatabase{
     );
 
 
-  Future<String?> getTemporaryQuote(String tempQuote) async 
+  Future<String?> getTemporaryQuote() async 
     => await preferences().then(
       (prefs) => prefs.getString(tempQuoteString)
     );

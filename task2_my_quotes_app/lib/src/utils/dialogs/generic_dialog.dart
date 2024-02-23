@@ -34,7 +34,7 @@ Future<T?> showGenericDialog<T>({
           Navigator.pop(context) 
           : Navigator.of(context).pop(optionValue),
         child: Text(optionKey).decorateWithGoogleFont(
-          tealColorWithOpacity, 
+          whiteColor, 
           fontWeight7,
           fontSize2, 
         ),        

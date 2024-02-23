@@ -22,13 +22,7 @@ class SavedQuotes extends StatelessWidget {
         if(snapshot.connectionState == ConnectionState.done){
           if(snapshot.hasData){
             print('There is data');
-            // return ListView.builder(
-            //   itemCount: snapshot.data!.length,
-            //   itemBuilder: (context, listIndex){
-            //     print('Inside the listView.builder');
-            //     return const Center(child: Text('Hello dear'));
-            //   }
-            // );
+            print(snapshot.data);
             return Center(
               child: const Text(noSavedQuotes).decorateWithGoogleFont(
                 whiteColor, 

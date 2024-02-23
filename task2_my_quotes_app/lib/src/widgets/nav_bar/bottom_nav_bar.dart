@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:task2_my_quotes_app/src/functions/button_functions.dart';
 import 'package:task2_my_quotes_app/src/widgets/nav_bar/custom_nav_bar_button_column.dart';
 
 class BottomNavButtons extends StatelessWidget {
@@ -15,7 +16,7 @@ class BottomNavButtons extends StatelessWidget {
         NavBarButtonColumn(
           //activateButtons: activateButtons,
           icon: FontAwesomeIcons.download, 
-          function: () {},
+          function: () async => await saveQuote(context: context),
           title: 'Save Quote'
         ),
         NavBarButtonColumn(

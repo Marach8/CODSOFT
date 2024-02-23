@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:flutter/services.dart' show Uint8List;
 import 'package:http/http.dart' as http;
+import 'package:task2_my_quotes_app/src/functions/database.dart';
 import 'package:task2_my_quotes_app/src/utils/strings.dart';
 
 
@@ -24,17 +25,23 @@ Future<Uint8List?> getRandomImage() async{
 
 
 Future<String?> getRandomQuote() async{
-  final response = await http.get(
-    Uri.parse(quotesUrl),
-    headers: {apiKey: apiKeyValue}
-  );
+  try{
+    final response = await http.get(
+      Uri.parse(quotesUrl),
+      headers: {apiKey: apiKeyValue}
+    );
 
-  if(response.statusCode == 200){
-    final data = jsonDecode(response.body);
-    return data[0][quotesKey];
+    if(response.statusCode == 200){
+      final data = jsonDecode(response.body);
+      final quote = data[0][quotesKey];
+      await LocalDatabase().setTemporaryQuote(quote);
+      return quote;
+    }
+    return null;
   }
 
-  else{
+  catch (_){
+    await LocalDatabase().setTemporaryQuote(emptyString);
     return null;
   }
 }

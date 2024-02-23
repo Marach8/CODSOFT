@@ -9,7 +9,7 @@ Future showFlushbar(BuildContext context, String message){
         child: Container(
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(5), 
-            color: tealColorWithOpacity,
+            color: blackColor,
           ),
           padding: const EdgeInsets.all(10),
           child: Text(

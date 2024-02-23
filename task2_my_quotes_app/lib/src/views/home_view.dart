@@ -13,9 +13,7 @@ class QuotesHome extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    String? quote;
-    bool? activateButtons;
-
+    
     return AnnotatedRegion<SystemUiOverlayStyle>(
       value: SystemUiOverlayStyle(
         statusBarColor: transparentColor,
@@ -37,14 +35,10 @@ class QuotesHome extends StatelessWidget {
                     final quotesSnaphot = snapshot.data?.last;
 
                     if(imageSnapshot == null || quotesSnaphot == null){
-                      activateButtons = false;
                       return const FallBackWidget();
                     }
 
                     else{
-                      quote = quotesSnaphot as String;
-                      activateButtons = true;
-
                       return PictureAndQuoteWidget(
                         imageData: imageSnapshot as Uint8List,
                         quotesText: quotesSnaphot,
@@ -53,7 +47,6 @@ class QuotesHome extends StatelessWidget {
                   }
 
                   else{
-                    activateButtons = false;
                     return BackgroundImageWithOverlayWidget(
                       context1: context
                     );
