@@ -26,8 +26,8 @@ SingleTickerProviderStateMixin{
     super.initState();
     sizeController = AnimationController(
       vsync: this,
-      duration: const Duration(seconds: 2),
-      reverseDuration: const Duration(seconds: 2), 
+      duration: const Duration(seconds: 5),
+      reverseDuration: const Duration(seconds: 5), 
     )..repeat(reverse: true);
 
     sizeAnimation = Tween<double> (

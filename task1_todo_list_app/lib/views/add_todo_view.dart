@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:gap/gap.dart';
@@ -19,6 +18,8 @@ import 'package:task1_todo_list_app/widgets/custom_widgets/elevatedbutton_widget
 import 'package:task1_todo_list_app/widgets/custom_widgets/leading_back_arrow.dart';
 import 'package:task1_todo_list_app/widgets/custom_widgets/lottie_view.dart';
 import 'package:task1_todo_list_app/widgets/custom_widgets/textfield_widget.dart';
+import 'package:task1_todo_list_app/widgets/other_widgets/empty_widget.dart';
+import 'package:task1_todo_list_app/widgets/other_widgets/todo_number_indicator.dart';
 
 
 class AddTodoView extends HookWidget {
@@ -33,6 +34,7 @@ class AddTodoView extends HookWidget {
     final oldtitle = currentState.initialTodo?[0];
     final oldDueDateTime = currentState.initialTodo?[1];
     final oldContent = currentState.initialTodo?[2];
+    final numberOfTodos = currentState.numberOfTodos;
 
     
     final titleController = useTextEditingController(text: oldtitle);
@@ -84,7 +86,11 @@ class AddTodoView extends HookWidget {
                       ContainerWidget(
                         padding: const EdgeInsets.all(20),
                         children: [
-                          const Gap(10),
+                          numberOfTodos == null || numberOfTodos == 0 ? emptyContainer 
+                        : TodosNumberIndicator(
+                          numberOfTodos: numberOfTodos.toString()
+                        ),
+                          const Gap(20),
                           CustomTextField(
                             title: enterTitle, 
                             controller: titleController
@@ -92,7 +98,9 @@ class AddTodoView extends HookWidget {
                           const Gap(10),
                           const DividerWidget(color: purpleColor),
                           const Gap(10),
+
                           CustomTextField(
+                            showSuffixIcon: true,
                             title: enterDueDateTime, 
                             controller: dueDateTimeController,
                             onTap: () async{

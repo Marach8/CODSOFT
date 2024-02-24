@@ -44,6 +44,7 @@ class _HomeViewInstructionsState extends State<HomeViewInstructions>{
   @override 
   void dispose(){
     controller.dispose();
+    timer.cancel();
     super.dispose();
   }
 

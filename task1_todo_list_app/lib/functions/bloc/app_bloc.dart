@@ -475,11 +475,15 @@ class AppBloc extends Bloc<AppEvents, AppState>{
         event.titleController.clear();
         event.dueDateTimeController.clear();
         event.contentController.clear();
+
+        final newNumberOfTodos = await backend.getLatestTodoCount();
+
         
         emit(
           InAddTodoViewAppState(
             alert: todoSaved,
-            alertContent: addAgain
+            alertContent: addAgain,
+            numberOfTodos: newNumberOfTodos
           )
         );
         return;

@@ -42,7 +42,7 @@ class RowWithProfilePicture extends HookWidget {
             width: isZoomed ? 260: 80,
             decoration: BoxDecoration(
               shape: BoxShape.circle,
-              border: const Border().modify(purpleColor, 2)
+              border: const Border().modifyBorder(purpleColor, 2)
             ),
             child: ClipRRect(
               borderRadius: BorderRadius.circular(
