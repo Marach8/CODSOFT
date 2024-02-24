@@ -19,21 +19,9 @@ class QuizHome extends StatelessWidget {
           title: const Text('Quiz App'),
           centerTitle: true,
           backgroundColor: whiteColor.withAlpha(50),
-          bottom: PreferredSize(
-            preferredSize: const Size.square(40),
-            child: Expanded(
-              child: Padding(
-                padding: const EdgeInsets.fromLTRB(20, 10, 20, 0),
-                child: Center(
-                  child: ListView(
-                    scrollDirection: Axis.horizontal,
-                    children: Iterable.generate(
-                      6, (i) => const CategoryContainerWidget(category: 'categorykjkjghgfgfgkjkghtrsdxghkl;')
-                    ).toList(),
-                  ),
-                ),
-              )
-            )
+          bottom: const PreferredSize(
+            preferredSize: Size.square(40),
+            child: CategoryContainerWidget()
           ),
         ),
         body: Center(
