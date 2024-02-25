@@ -26,3 +26,6 @@ const selectQuizNumber = 'Select Number of Quizes.';
 const startQuiz = 'Start Quiz';
 const youSelected = 'You selected ';
 const tapToDeselect = ' Tap to deselect.';
+const emptyString = '';
+const multipleString = 'multiple';
+const boolString = 'boolean';

@@ -26,9 +26,9 @@ class CategoriesListView extends StatelessWidget {
           children: categoriesModel.map(
             (model){
 
-              final quizNotify = Provider.of<QuizManager>(context);
+              final quizNotify = Provider.of<QuizManager>(context, listen: false);
               final categoryName = model.categoryName;
-              final categoryId = model.categoryId;
+              final categoryId = model.categoryId.toString();
 
               return GestureDetector(
                 onTap: () => quizNotify.callToAction(

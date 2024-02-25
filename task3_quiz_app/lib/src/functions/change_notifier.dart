@@ -1,19 +1,22 @@
 import 'package:flutter/material.dart';
 
 class QuizManager extends ChangeNotifier{
-  bool activateStartQuizeButton = false;
-  bool showFirst = true;
+  String? selectedSubcategory;
+  
+  String? category,
+  typeSubCategory,
+  difficultySubCategory,
+  numberSubcategory;
 
-  int? category;
-  String? typeSubCategory;
-  String? difficultySubCategory;
-  String? numberSubcategory;
+  bool get activateStartQuizeButton 
+    => category != null && typeSubCategory != null && 
+    difficultySubCategory != null && numberSubcategory != null
+    && selectedSubcategory != null;
 
-  List<String> quizSubCategories = [];
-
-  void organizQuery(){
+  void organizeQuery(){
     
   }
+
 
   void callToAction(void Function() action){
     action();

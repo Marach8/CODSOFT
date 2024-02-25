@@ -37,31 +37,54 @@ extension CheckAndSetString on String{
 
     final quizNotifier = Provider.of<QuizManager>(context, listen: false);
 
-    if(
-      this == multipleChoice ||
-      this == trueOrFalse ||
-      this == anyQuestion
-    ){
-      quizNotifier.callToAction(() => quizNotifier.typeSubCategory = this);
+    if(this == multipleChoice ){
+      quizNotifier.callToAction(() => quizNotifier.typeSubCategory = multipleString);
     }
 
-    else if(
-      this == hard ||
-      this == medium ||
-      this == easy ||
-      this == anyDifficulty
-    ){
-      quizNotifier.callToAction(() => quizNotifier.difficultySubCategory = this);
+    else if(this == trueOrFalse){
+      quizNotifier.callToAction(() => quizNotifier.typeSubCategory = boolString);
     }
 
-    else if(
-      this == ten ||
-      this == twenty ||
-      this == thirty ||
-      this == fourty ||
-      this == fifty
-    ){
-      quizNotifier.callToAction(() => quizNotifier.numberSubcategory = this);
+    else if(this == anyQuestion){
+      quizNotifier.callToAction(() => quizNotifier.typeSubCategory = emptyString);
+    }
+
+
+    else if(this == hard){
+      quizNotifier.callToAction(() => quizNotifier.difficultySubCategory = hard.toLowerCase());
+    }
+
+    else if(this == medium){
+      quizNotifier.callToAction(() => quizNotifier.difficultySubCategory = medium.toLowerCase());
+    }
+
+    else if(this == easy){
+      quizNotifier.callToAction(() => quizNotifier.difficultySubCategory = easy.toLowerCase());
+    }
+
+    else if(this == anyDifficulty){
+      quizNotifier.callToAction(() => quizNotifier.difficultySubCategory = emptyString);
+    }
+    
+
+    else if(this == ten){
+      quizNotifier.callToAction(() => quizNotifier.numberSubcategory = 10.toString());
+    }
+
+    else if(this == twenty){
+      quizNotifier.callToAction(() => quizNotifier.numberSubcategory = 20.toString());
+    }
+
+    else if(this == thirty){
+      quizNotifier.callToAction(() => quizNotifier.numberSubcategory = 30.toString());
+    }
+
+    else if(this == fourty){
+      quizNotifier.callToAction(() => quizNotifier.numberSubcategory = 40.toString());
+    }
+
+    else if(this == fifty){
+      quizNotifier.callToAction(() => quizNotifier.numberSubcategory = 50.toString());
     }
   }
 }

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
+import 'package:provider/provider.dart';
+import 'package:task3_quiz_app/src/functions/change_notifier.dart';
 import 'package:task3_quiz_app/src/utils/constants/colors.dart';
 import 'package:task3_quiz_app/src/utils/constants/fontsizes.dart';
 import 'package:task3_quiz_app/src/utils/constants/fontweights.dart';
@@ -29,8 +31,17 @@ class _QuizSubCategoryState extends State<QuizSubCategory> {
   bool _showFirst = true;
   String? _selectedSubcategory;
 
+
   @override
   Widget build(BuildContext context) {
+    
+    final quizNotify = Provider.of<QuizManager>(context, listen: false);
+    WidgetsBinding.instance.addPostFrameCallback((_){
+      quizNotify.callToAction(
+        () => quizNotify.selectedSubcategory = _selectedSubcategory
+      );
+    });
+
     return GestureDetector(
       onTap: () => setState(() => _showFirst = !_showFirst),
       child: Container(
@@ -53,7 +64,12 @@ class _QuizSubCategoryState extends State<QuizSubCategory> {
                 ),
                 const Gap(10),
                 _selectedSubcategory != null ? GestureDetector(
-                  onTap: () => setState(() => _selectedSubcategory = null),
+                  onTap: () {
+                    quizNotify.callToAction(
+                      () => quizNotify.selectedSubcategory = _selectedSubcategory
+                    );
+                    setState(() => _selectedSubcategory = null);
+                  },
                   child: Text(
                     youSelected + _selectedSubcategory! + tapToDeselect
                   ).decorateWithGoogleFont(
