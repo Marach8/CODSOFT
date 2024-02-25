@@ -17,9 +17,9 @@ class CategoriesListView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 35,
+      height: 45,
       child: Padding(
-        padding: const EdgeInsets.fromLTRB(20, 10, 20, 0),
+        padding: const EdgeInsets.fromLTRB(20, 5, 20, 10),
         child: ListView(
           scrollDirection: Axis.horizontal,
           children: categoriesModel.map(
@@ -31,7 +31,7 @@ class CategoriesListView extends StatelessWidget {
                   GestureDetector(
                     onTap: () async {},
                     child: Container(
-                      height: 30,
+                      height: 40,
                       padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
                       decoration: BoxDecoration(
                         color: whiteColor,

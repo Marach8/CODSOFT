@@ -32,10 +32,14 @@ class _SwipeInstructionState extends State<SwipeInstruction> with SingleTickerPr
     .animate(controller);
 
     animation.addStatusListener(
-      (status) {
+      (status) async {
         if(status == AnimationStatus.completed){
-          controller.reverse()
-          .then((_) => controller.forward());
+          await Future.delayed(
+            const Duration(seconds: 2)
+          ).then(
+            (_) => controller.reverse()
+            .then((_) => controller.forward())
+          );
         }
       }
     );
