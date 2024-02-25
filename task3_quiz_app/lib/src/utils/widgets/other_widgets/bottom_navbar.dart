@@ -17,7 +17,7 @@ class BottomNavBarButton extends StatelessWidget {
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
     return Container(
-      padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
+      padding: const EdgeInsets.fromLTRB(20, 5, 20, 0),
       width: screenWidth,
       child: ElevatedButton(
         onPressed: onPressed,

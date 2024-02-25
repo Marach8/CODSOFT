@@ -3,7 +3,10 @@ import 'package:gap/gap.dart';
 import 'package:task3_quiz_app/src/utils/constants/colors.dart';
 import 'package:task3_quiz_app/src/utils/constants/fontsizes.dart';
 import 'package:task3_quiz_app/src/utils/constants/fontweights.dart';
+import 'package:task3_quiz_app/src/utils/constants/strings.dart';
 import 'package:task3_quiz_app/src/utils/extensions.dart';
+import 'package:task3_quiz_app/src/utils/widgets/custom_widgets/subcategory_container.dart';
+import 'package:task3_quiz_app/src/utils/widgets/other_widgets/empty_container.dart';
 import 'package:task3_quiz_app/src/utils/widgets/other_widgets/list_tile_leading_widget.dart';
 
 class QuizSubCategory extends StatefulWidget {
@@ -24,13 +27,14 @@ class QuizSubCategory extends StatefulWidget {
 
 class _QuizSubCategoryState extends State<QuizSubCategory> {
   bool _showFirst = true;
+  String? selectedSubcategory;
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () => setState(() => _showFirst = !_showFirst),
       child: Container(
-        padding: const EdgeInsets.all(20),
+        padding: const EdgeInsets.fromLTRB(20, 10, 20, 10),
         child: AnimatedCrossFade(
           firstChild: Center(
             child: Column(
@@ -42,11 +46,22 @@ class _QuizSubCategoryState extends State<QuizSubCategory> {
                   fontSize4
                 ),
                 const Gap(10),
-                Text(widget.typeDescription).decorateWithGoogleFont(
+                Text(widget.typeDescription).decorateWithGoogleFont(                  
                   blackColor,
                   fontWeight3,
                   fontSize2
-                )
+                ),
+                const Gap(10),
+                selectedSubcategory != null ? GestureDetector(
+                  onTap: () => setState(() => selectedSubcategory = null),
+                  child: Text(
+                    youSelected + selectedSubcategory! + tapToDeselect
+                  ).decorateWithGoogleFont(
+                    redColor,
+                    fontWeight9,
+                    fontSize1
+                  ),
+                ) : emptySizedBox
               ],
             ),
           ),
@@ -57,32 +72,25 @@ class _QuizSubCategoryState extends State<QuizSubCategory> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: widget.children.map(
                   (child) {
-                    return GestureDetector(
-                      onTap: (){},
-                      child: Container(
-                        margin: const EdgeInsets.only(bottom: 10),
-                        height: 30,
-                        padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
-                        decoration: BoxDecoration(
-                          color: redColor.withOpacity(0.1),
-                          borderRadius: BorderRadius.circular(5),
-                          border: Border.all().modifyBorder(greenColor, 0.5),
-                        ),
-                        child: Center(
-                          child: Row(
-                            children: [
-                              ListTileLeadingWidget(
-                                listIndex: (widget.children.indexOf(child) + 1).toString()
-                              ),
-                              const Gap(10),
-                              Text(child).decorateWithGoogleFont(
-                                blackColor,
-                                fontWeight4,
-                                fontSize2
-                              ),
-                            ],
+                    return SubCategoryContainer(
+                      onTap: (){
+                        setState(() {
+                          selectedSubcategory = child;
+                          _showFirst = !_showFirst;
+                        });
+                      },
+                      child: Row(
+                        children: [
+                          ListTileLeadingWidget(
+                            listIndex: (widget.children.indexOf(child) + 1).toString()
                           ),
-                        )
+                          const Gap(10),
+                          Text(child).decorateWithGoogleFont(
+                            blackColor,
+                            fontWeight4,
+                            fontSize2
+                          ),
+                        ],
                       ),
                     );
                   }

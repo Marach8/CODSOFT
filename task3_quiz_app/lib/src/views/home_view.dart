@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:task3_quiz_app/src/utils/constants/colors.dart';
 import 'package:task3_quiz_app/src/utils/widgets/custom_widgets/annotated_widget.dart';
 import 'package:task3_quiz_app/src/utils/widgets/other_widgets/appbar_bottom.dart';
-import 'package:task3_quiz_app/src/utils/widgets/other_widgets/bottom_sheet.dart';
+import 'package:task3_quiz_app/src/utils/widgets/other_widgets/bottom_navbar.dart';
 import 'package:task3_quiz_app/src/utils/widgets/other_widgets/home_body.dart';
 
 class QuizHome extends StatelessWidget {

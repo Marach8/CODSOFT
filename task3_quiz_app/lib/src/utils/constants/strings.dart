@@ -22,3 +22,5 @@ const fifty = 'Fifty.';
 const quizeNumberInstruction = 'Tap to select how many quiz questions you want to answer.';
 const selectQuizNumber = 'Select Number of Quizes.';
 const startQuiz = 'Start Quiz';
+const youSelected = 'You selected ';
+const tapToDeselect = ' Tap to deselect.';
