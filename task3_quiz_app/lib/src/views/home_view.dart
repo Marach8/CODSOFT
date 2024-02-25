@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:task3_quiz_app/src/utils/constants/colors.dart';
 import 'package:task3_quiz_app/src/utils/widgets/custom_widgets/annotated_widget.dart';
-import 'package:task3_quiz_app/src/utils/widgets/custom_widgets/categories_container.dart';
+import 'package:task3_quiz_app/src/utils/widgets/other_widgets/appbar_bottom.dart';
 import 'package:task3_quiz_app/src/utils/widgets/custom_widgets/container_widget.dart';
 
 class QuizHome extends StatelessWidget {
@@ -10,7 +10,6 @@ class QuizHome extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final screenWidth = MediaQuery.of(context).size.width;
 
     return AnnotatedRegionWidget(
       child: Scaffold(
@@ -20,8 +19,8 @@ class QuizHome extends StatelessWidget {
           centerTitle: true,
           backgroundColor: whiteColor.withAlpha(50),
           bottom: const PreferredSize(
-            preferredSize: Size.square(40),
-            child: CategoryContainerWidget()
+            preferredSize: Size.square(60),
+            child: AppBarBottomWidget()
           ),
         ),
         body: Center(
