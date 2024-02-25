@@ -43,17 +43,19 @@ class _SwipeInstructionState extends State<SwipeInstruction> with SingleTickerPr
         }
       }
     );
+
+    controller.forward();
   }
 
   @override 
   void dispose(){
+    controller.stop();
     controller.dispose();
     super.dispose();
   }
   
   @override
   Widget build(BuildContext context) {
-    controller.forward();
 
     return AnimatedBuilder(
       animation: animation, 
