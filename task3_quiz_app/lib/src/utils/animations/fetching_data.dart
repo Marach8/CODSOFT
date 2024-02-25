@@ -5,14 +5,14 @@ import 'package:task3_quiz_app/src/utils/constants/fontweights.dart';
 import 'package:task3_quiz_app/src/utils/constants/strings.dart';
 import 'package:task3_quiz_app/src/utils/extensions.dart';
 
-class SwipeInstruction extends StatefulWidget {
-  const SwipeInstruction({super.key});
+class FetchingCategories extends StatefulWidget {
+  const FetchingCategories ({super.key});
 
   @override
-  State<SwipeInstruction> createState() => _SwipeInstructionState();
+  State<FetchingCategories> createState() => _SwipeInstructionState();
 }
 
-class _SwipeInstructionState extends State<SwipeInstruction> with SingleTickerProviderStateMixin{
+class _SwipeInstructionState extends State<FetchingCategories> with SingleTickerProviderStateMixin{
   late AnimationController controller;
   late Animation<double> animation;
 
@@ -21,7 +21,7 @@ class _SwipeInstructionState extends State<SwipeInstruction> with SingleTickerPr
     super.initState();
     controller = AnimationController(
       vsync: this,
-      duration: const Duration(seconds: 5)
+      duration: const Duration(seconds: 1)
     )..repeat(reverse: true);
 
     animation =  Tween<double>(
@@ -34,11 +34,8 @@ class _SwipeInstructionState extends State<SwipeInstruction> with SingleTickerPr
     animation.addStatusListener(
       (status) async {
         if(status == AnimationStatus.completed){
-          await Future.delayed(
-            const Duration(seconds: 2)
-          ).then(
-            (_) => controller.reverse()
-            .then((_) => controller.forward())
+          controller.reverse().then(
+            (_) => controller.forward()
           );
         }
       }
@@ -62,7 +59,7 @@ class _SwipeInstructionState extends State<SwipeInstruction> with SingleTickerPr
       builder: (_, __) => Opacity(
         opacity: animation.value,
         child: Center(
-          child: const Text(appBarInstruction).decorateWithGoogleFont(
+          child: const Text(fetchingData).decorateWithGoogleFont(
             blackColor,
             fontWeight5,
             fontSize2

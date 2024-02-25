@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:task3_quiz_app/src/functions/change_notifier.dart';
 import 'package:task3_quiz_app/src/utils/constants/colors.dart';
 import 'package:task3_quiz_app/src/utils/constants/fontsizes.dart';
 import 'package:task3_quiz_app/src/utils/constants/fontweights.dart';
@@ -23,10 +25,15 @@ class CategoriesListView extends StatelessWidget {
           scrollDirection: Axis.horizontal,
           children: categoriesModel.map(
             (model){
+
+              final quizNotify = Provider.of<QuizManager>(context);
               final categoryName = model.categoryName;
-              //final categoryId = model.categoryId;
+              final categoryId = model.categoryId;
+
               return GestureDetector(
-                onTap: () async {},
+                onTap: () => quizNotify.callToAction(
+                  () => quizNotify.category = categoryId
+                ),
                 child: Container(
                   margin: const EdgeInsets.only(right: 5),
                   height: 40,

@@ -27,7 +27,7 @@ class QuizSubCategory extends StatefulWidget {
 
 class _QuizSubCategoryState extends State<QuizSubCategory> {
   bool _showFirst = true;
-  String? selectedSubcategory;
+  String? _selectedSubcategory;
 
   @override
   Widget build(BuildContext context) {
@@ -52,12 +52,12 @@ class _QuizSubCategoryState extends State<QuizSubCategory> {
                   fontSize2
                 ),
                 const Gap(10),
-                selectedSubcategory != null ? GestureDetector(
-                  onTap: () => setState(() => selectedSubcategory = null),
+                _selectedSubcategory != null ? GestureDetector(
+                  onTap: () => setState(() => _selectedSubcategory = null),
                   child: Text(
-                    youSelected + selectedSubcategory! + tapToDeselect
+                    youSelected + _selectedSubcategory! + tapToDeselect
                   ).decorateWithGoogleFont(
-                    redColor,
+                    greenColor,
                     fontWeight9,
                     fontSize1
                   ),
@@ -74,8 +74,9 @@ class _QuizSubCategoryState extends State<QuizSubCategory> {
                   (child) {
                     return SubCategoryContainer(
                       onTap: (){
+                        child.checkAndSet(context: context);
                         setState(() {
-                          selectedSubcategory = child;
+                          _selectedSubcategory = child;
                           _showFirst = !_showFirst;
                         });
                       },

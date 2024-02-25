@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:task3_quiz_app/src/functions/change_notifier.dart';
 import 'package:task3_quiz_app/src/utils/constants/colors.dart';
 import 'package:task3_quiz_app/src/utils/constants/fontsizes.dart';
 import 'package:task3_quiz_app/src/utils/constants/fontweights.dart';
@@ -16,27 +18,37 @@ class BottomNavBarButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
-    return Container(
-      padding: const EdgeInsets.fromLTRB(20, 5, 20, 0),
-      width: screenWidth,
-      child: ElevatedButton(
-        onPressed: onPressed,
-        style: const ButtonStyle(
-          backgroundColor: MaterialStatePropertyAll(greenColor),
-          foregroundColor: MaterialStatePropertyAll(whiteColor),
-          side: MaterialStatePropertyAll(
-            BorderSide(
-              color: whiteColor,
-              width: 1,
+
+    return Consumer<QuizManager>(
+      builder: (_, quizNotify, __){
+        final activate = quizNotify.activateStartQuizeButton;
+        return Container(
+          padding: const EdgeInsets.fromLTRB(20, 5, 20, 0),
+          width: screenWidth,
+          child: ElevatedButton(
+            onPressed: activate ? onPressed : null,
+            style: ButtonStyle(
+              backgroundColor: MaterialStatePropertyAll(
+                activate ? greenColor : greenColor.withAlpha(100)
+              ),
+              foregroundColor: MaterialStatePropertyAll(
+                activate ? whiteColor : whiteColor.withAlpha(50)
+              ),
+              side: const MaterialStatePropertyAll(
+                BorderSide(
+                  color: whiteColor,
+                  width: 1,
+                )
+              ) 
+            ),
+            child: const Text(startQuiz).decorateWithGoogleFont(
+              whiteColor,
+              fontWeight7,
+              fontSize2
             )
-          ) 
-        ),
-        child: const Text(startQuiz).decorateWithGoogleFont(
-          whiteColor,
-          fontWeight7,
-          fontSize2
-        )
-      )
+          )
+        );
+      }
     );
   }
 }

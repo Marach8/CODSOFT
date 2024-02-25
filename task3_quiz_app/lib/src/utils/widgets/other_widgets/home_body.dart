@@ -32,7 +32,8 @@ class HomeBodyWidget extends StatelessWidget {
                 children: [
                   hard,
                   medium,
-                  easy
+                  easy,
+                  anyDifficulty
                 ],
                 typeDescription: quizDifficultyInstruction,
                 typeHeading: selectQuizDifficulty,
