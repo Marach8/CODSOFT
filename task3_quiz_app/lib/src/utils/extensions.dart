@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
@@ -29,6 +30,40 @@ extension ModifyBorder on Border{
   Border modifyBorder(Color color, double width) => Border.all(
     color: color, width: width,
   );
+}
+
+
+extension OptionalCheckAndSet on String?{
+  void optionalCheckAndSet({
+    required BuildContext context,
+    required String? tracker
+  }){
+
+    final quizNotifier = Provider.of<QuizManager>(context, listen: false);
+
+    if(this == null){
+
+      if(
+        tracker == multipleChoice ||
+        tracker == trueOrFalse ||
+        tracker == anyQuestion
+      ){
+        quizNotifier.callToAction(() => quizNotifier.typeSubCategory = null);
+      }
+
+      else if(
+        tracker == hard || tracker == medium || tracker == easy || tracker == anyDifficulty
+      ){
+        quizNotifier.callToAction(() => quizNotifier.difficultySubCategory = null);
+      }
+
+      else if(
+        tracker == ten || tracker == twenty || tracker == thirty || tracker == fourty || tracker == fifty
+      ){
+        quizNotifier.callToAction(() => quizNotifier.numberSubcategory = null);
+      }
+    }
+  }
 }
 
 

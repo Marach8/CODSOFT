@@ -2,15 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:task3_quiz_app/src/utils/constants/colors.dart';
 import 'package:task3_quiz_app/src/utils/constants/fontsizes.dart';
 import 'package:task3_quiz_app/src/utils/constants/fontweights.dart';
+import 'package:task3_quiz_app/src/utils/constants/strings.dart';
 import 'package:task3_quiz_app/src/utils/extensions.dart';
 
 class SliderAnimationView extends StatefulWidget {
   final double distance;
-  final String text;
 
   const SliderAnimationView({
     super.key,
-    required this.text,
     required this.distance
   });
 
@@ -33,7 +32,7 @@ with SingleTickerProviderStateMixin{
 
     sliderAnimation = Tween<Offset> (
       begin: Offset(-widget.distance/100, 0), 
-      end: const Offset(5, 0)
+      end: const Offset(4, 0)
     ).animate(sliderController);
 
     sliderAnimation.addStatusListener((status) {
@@ -56,7 +55,7 @@ with SingleTickerProviderStateMixin{
     return SlideTransition(
       position: sliderAnimation,
       textDirection: TextDirection.rtl,
-      child: Text(widget.text).decorateWithGoogleFont(
+      child: const Text(appBarInstruction).decorateWithGoogleFont(
         blackColor,
         fontWeight2,
         fontSize2

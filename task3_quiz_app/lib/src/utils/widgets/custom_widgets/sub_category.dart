@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
-import 'package:provider/provider.dart';
-import 'package:task3_quiz_app/src/functions/change_notifier.dart';
 import 'package:task3_quiz_app/src/utils/constants/colors.dart';
 import 'package:task3_quiz_app/src/utils/constants/fontsizes.dart';
 import 'package:task3_quiz_app/src/utils/constants/fontweights.dart';
@@ -29,16 +27,17 @@ class QuizSubCategory extends StatefulWidget {
 
 class _QuizSubCategoryState extends State<QuizSubCategory> {
   bool _showFirst = true;
-  String? _selectedSubcategory;
+  String? _selectedSubcategory,
+  _trackSelectedCat;
 
 
   @override
   Widget build(BuildContext context) {
     
-    final quizNotify = Provider.of<QuizManager>(context, listen: false);
     WidgetsBinding.instance.addPostFrameCallback((_){
-      quizNotify.callToAction(
-        () => quizNotify.selectedSubcategory = _selectedSubcategory
+      _selectedSubcategory.optionalCheckAndSet(
+        context: context,
+        tracker: _trackSelectedCat
       );
     });
 
@@ -65,9 +64,7 @@ class _QuizSubCategoryState extends State<QuizSubCategory> {
                 const Gap(10),
                 _selectedSubcategory != null ? GestureDetector(
                   onTap: () {
-                    quizNotify.callToAction(
-                      () => quizNotify.selectedSubcategory = _selectedSubcategory
-                    );
+                    _trackSelectedCat = _selectedSubcategory;
                     setState(() => _selectedSubcategory = null);
                   },
                   child: Text(
@@ -81,6 +78,7 @@ class _QuizSubCategoryState extends State<QuizSubCategory> {
               ],
             ),
           ),
+
           secondChild: Center(
             child: SingleChildScrollView(
               child: Column(
