@@ -33,6 +33,19 @@ extension ModifyBorder on Border{
 }
 
 
+extension OrganizeQuery on List<String>{
+  String organizeQuery(){
+    for(var i = 1; i < length; i++){
+      if(this[i].isEmpty){
+        removeRange(i-1, i+1);
+        i--;
+      }
+    }
+    return join();
+  }
+}
+
+
 extension OptionalCheckAndSet on String?{
   void optionalCheckAndSet({
     required BuildContext context,
@@ -57,7 +70,7 @@ extension OptionalCheckAndSet on String?{
       }
 
       else if(isNumberSubCategory){
-        quizNotifier.callToAction(() => quizNotifier.numberSubcategory = null);
+        quizNotifier.callToAction(() => quizNotifier.numberSubCategory = null);
       }
     }
   }
@@ -83,15 +96,21 @@ extension CheckAndSetString on String{
 
 
     else if(this == hard){
-      quizNotifier.callToAction(() => quizNotifier.difficultySubCategory = hard.toLowerCase());
+      quizNotifier.callToAction(
+        () => quizNotifier.difficultySubCategory = hard.substring(0, hard.length - 1).toLowerCase()
+      );
     }
 
     else if(this == medium){
-      quizNotifier.callToAction(() => quizNotifier.difficultySubCategory = medium.toLowerCase());
+      quizNotifier.callToAction(
+        () => quizNotifier.difficultySubCategory = medium.substring(0, medium.length - 1).toLowerCase()
+      );
     }
 
     else if(this == easy){
-      quizNotifier.callToAction(() => quizNotifier.difficultySubCategory = easy.toLowerCase());
+      quizNotifier.callToAction(
+        () => quizNotifier.difficultySubCategory = easy.substring(0, easy.length - 1).toLowerCase()
+      );
     }
 
     else if(this == anyDifficulty){
@@ -100,23 +119,23 @@ extension CheckAndSetString on String{
     
 
     else if(this == ten){
-      quizNotifier.callToAction(() => quizNotifier.numberSubcategory = 10.toString());
+      quizNotifier.callToAction(() => quizNotifier.numberSubCategory = 10.toString());
     }
 
     else if(this == twenty){
-      quizNotifier.callToAction(() => quizNotifier.numberSubcategory = 20.toString());
+      quizNotifier.callToAction(() => quizNotifier.numberSubCategory = 20.toString());
     }
 
     else if(this == thirty){
-      quizNotifier.callToAction(() => quizNotifier.numberSubcategory = 30.toString());
+      quizNotifier.callToAction(() => quizNotifier.numberSubCategory = 30.toString());
     }
 
     else if(this == fourty){
-      quizNotifier.callToAction(() => quizNotifier.numberSubcategory = 40.toString());
+      quizNotifier.callToAction(() => quizNotifier.numberSubCategory = 40.toString());
     }
 
     else if(this == fifty){
-      quizNotifier.callToAction(() => quizNotifier.numberSubcategory = 50.toString());
+      quizNotifier.callToAction(() => quizNotifier.numberSubCategory = 50.toString());
     }
   }
 }

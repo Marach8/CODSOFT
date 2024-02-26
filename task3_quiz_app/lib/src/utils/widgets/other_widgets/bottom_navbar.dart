@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:task3_quiz_app/src/functions/change_notifier.dart';
+import 'package:task3_quiz_app/src/functions/get_api.dart';
 import 'package:task3_quiz_app/src/utils/constants/colors.dart';
 import 'package:task3_quiz_app/src/utils/constants/fontsizes.dart';
 import 'package:task3_quiz_app/src/utils/constants/fontweights.dart';
@@ -8,11 +9,11 @@ import 'package:task3_quiz_app/src/utils/constants/strings.dart';
 import 'package:task3_quiz_app/src/utils/extensions.dart';
 
 class BottomNavBarButton extends StatelessWidget {
-  final void Function() onPressed;
+  // final void Function() onPressed;
 
   const BottomNavBarButton({
     super.key,
-    required this.onPressed
+    //required this.onPressed
   });
 
   @override
@@ -26,7 +27,13 @@ class BottomNavBarButton extends StatelessWidget {
           padding: const EdgeInsets.fromLTRB(20, 5, 20, 0),
           width: screenWidth,
           child: ElevatedButton(
-            onPressed: activate ? onPressed : null,
+            onPressed: activate ?
+            () async{
+              final url = quizNotify.organizeQuery();
+              print(url);
+              await getQuizQuestion(url);
+            } : null,
+            
             style: ButtonStyle(
               backgroundColor: MaterialStatePropertyAll(
                 activate ? greenColor : greenColor.withAlpha(100)

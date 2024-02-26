@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:task3_quiz_app/src/utils/constants/strings.dart';
 import 'package:task3_quiz_app/src/utils/models/categories_model.dart';
+import 'package:task3_quiz_app/src/utils/models/quiz_question_model.dart';
 
 Future<Iterable<CategoriesModel>?> getQuizCategories() async {
   try{
@@ -28,40 +29,26 @@ Future<Iterable<CategoriesModel>?> getQuizCategories() async {
 }
 
 
-// Future<Uint8List?> getRandomImage() async{
-//   final response = await http.get(
-//     Uri.parse(backgroundImageUrl), 
-//   );
+Future<Iterable<QuizQuestion>?> getQuizQuestion(String url)async{
+  try{
+    final response = await http.get(Uri.parse(url));
 
-//   if(response.statusCode == 200){
-//     return response.bodyBytes;
-//   }
+    if(response.statusCode != 200){
+      return null;
+    }
 
-//   else{
-//     return null;
-//   }
-// }
-
-
-// Future<List<String>?> getRandomQuote() async{
-//   try{
-//     final response = await http.get(
-//       Uri.parse(quotesUrl),
-//       headers: {apiKey: apiKeyValue}
-//     );
-
-//     if(response.statusCode == 200){
-//       final data = jsonDecode(response.body);
-//       final quote = data[0][quotesKey];
-//       final author = data[0][authorKey];
-//       await LocalDatabase().setTemporaryQuote([quote, author]);
-//       return [quote, author];
-//     }
-//     return null;
-//   }
-
-//   catch (_){
-//     await LocalDatabase().setTemporaryQuote([]);
-//     return null;
-//   }
-// }
+    final jsonData = jsonDecode(response.body);
+    final List<dynamic> questions = jsonData[resultsKey];
+    final quizQuestions = Iterable.generate(
+      questions.length,
+      (index) => QuizQuestion.fromJson(
+        json: questions[index], number: (index + 1).toString()
+      )
+    );
+    print(jsonData.toString());
+    return quizQuestions;
+  }
+  catch (_){
+    return null;
+  }
+}
