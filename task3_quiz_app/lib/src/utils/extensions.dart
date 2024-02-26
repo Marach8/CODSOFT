@@ -40,26 +40,23 @@ extension OptionalCheckAndSet on String?{
   }){
 
     final quizNotifier = Provider.of<QuizManager>(context, listen: false);
+    final isTypeSubCategory = [multipleChoice, trueOrFalse, anyQuestion]
+      .any((element) => element == tracker);
+    final isDifficultySubCategory = [hard, medium, easy, anyDifficulty]
+      .any((element) => element == tracker);
+    final isNumberSubCategory = [ten, twenty, thirty, fourty, fifty]
+      .any((element) => element == tracker);
 
     if(this == null){
-
-      if(
-        tracker == multipleChoice ||
-        tracker == trueOrFalse ||
-        tracker == anyQuestion
-      ){
+      if(isTypeSubCategory){
         quizNotifier.callToAction(() => quizNotifier.typeSubCategory = null);
       }
-
-      else if(
-        tracker == hard || tracker == medium || tracker == easy || tracker == anyDifficulty
-      ){
+      
+      else if(isDifficultySubCategory){
         quizNotifier.callToAction(() => quizNotifier.difficultySubCategory = null);
       }
 
-      else if(
-        tracker == ten || tracker == twenty || tracker == thirty || tracker == fourty || tracker == fifty
-      ){
+      else if(isNumberSubCategory){
         quizNotifier.callToAction(() => quizNotifier.numberSubcategory = null);
       }
     }
