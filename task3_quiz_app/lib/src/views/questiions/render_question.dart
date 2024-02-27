@@ -50,17 +50,19 @@ class QuestionsRender extends StatelessWidget {
                       fontWeight4,
                       fontSize3
                     ),
-                    subtitle: Column(
-                      children: options.map(
-                        (option) {
-                          String? selectedValue;
-                          return Radio(
-                            value: option,
-                            groupValue: selectedValue,
-                            onChanged: (value) => selectedValue = value
-                          );
-                        }
-                      ).toList(),
+                    subtitle: SingleChildScrollView(
+                      child: Column(
+                        children: options.map(
+                          (option) {
+                            String? selectedValue;
+                            return Radio(
+                              value: option,
+                              groupValue: selectedValue,
+                              onChanged: (value) => selectedValue = value
+                            );
+                          }
+                        ).toList(),
+                      ),
                     ),
                   )
                 );
