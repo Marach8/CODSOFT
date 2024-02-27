@@ -8,6 +8,7 @@ class QuizManager extends ChangeNotifier{
   final pageController = PageController(initialPage: 0);
 
   bool atEndOfPage = false;
+  bool atBeginingOfPage = true;
   
   @override
   void dispose(){
