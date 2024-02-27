@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:gap/gap.dart';
 import 'package:provider/provider.dart';
 import 'package:task3_quiz_app/src/functions/change_notifier.dart';
@@ -17,8 +18,9 @@ class QuestionsRender extends StatelessWidget {
     final quizNotify = Provider.of<QuizManager>(context, listen: false);
     final quizQuestions = quizNotify.retrievedQuestions!;
 
-    return Padding(
+    return Container(
       padding: const EdgeInsets.all(20),
+      clipBehavior: Clip.hardEdge,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         mainAxisSize: MainAxisSize.min,
@@ -31,6 +33,8 @@ class QuestionsRender extends StatelessWidget {
           const Gap(20),
           Expanded(
             child: PageView.builder(
+              allowImplicitScrolling: true,
+              clipBehavior: Clip.hardEdge,
               itemCount: quizQuestions.length,
               itemBuilder: (context, pageIndex){
 
@@ -39,26 +43,44 @@ class QuestionsRender extends StatelessWidget {
                 final question = questionData.question;
                 final questionNumber = questionData.questionNumber;
                 final correctAnswer = questionData.correctAnswer;
-                options..add(correctAnswer)..shuffle();
+                options..add(correctAnswer)..shuffle();                
 
                 return Card(
+
                   child: ListTile(
+                    contentPadding: const EdgeInsets.all(10),
+                    isThreeLine: true,
                     leading: ListTileLeadingWidget(listIndex: questionNumber),
                     minLeadingWidth: 0,
                     title: Text(question).decorateWithGoogleFont(
                       blackColor,
                       fontWeight4,
-                      fontSize3
+                      fontSize2
                     ),
                     subtitle: SingleChildScrollView(
+                      controller: PrimaryScrollController.of(context),
                       child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        mainAxisSize: MainAxisSize.min,
                         children: options.map(
                           (option) {
                             String? selectedValue;
-                            return Radio(
-                              value: option,
-                              groupValue: selectedValue,
-                              onChanged: (value) => selectedValue = value
+                            return Row(
+                              children: [                              
+                                Radio<String>(
+                                  value: option,
+                                  groupValue: selectedValue,
+                                  onChanged: (value) => selectedValue = value,
+                                  toggleable: true,
+                                ),
+                                Expanded(
+                                  child: Text(option).decorateWithGoogleFont(
+                                    blackColor,
+                                    fontWeight2,
+                                    fontSize2
+                                  ),
+                                ),
+                              ],
                             );
                           }
                         ).toList(),

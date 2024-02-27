@@ -13,7 +13,7 @@ extension ModifyText on Text{
     double fontSize,
     [bool? controlOverflow]
   ) => Text(
-    data ?? '', 
+    data ?? emptyString, 
     style: TextStyle(
       fontFamily: quickSandFont,
       fontSize: fontSize,
