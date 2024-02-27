@@ -20,11 +20,6 @@ Future showFlushbar(BuildContext context, String message){
             fontWeight4,
             fontSize2
           ),
-          // child: Text(
-          //   message, 
-          //   style: const TextStyle(color: redColor),
-          //   textAlign: TextAlign.center,
-          // ),
         ),
       ),
     ),
