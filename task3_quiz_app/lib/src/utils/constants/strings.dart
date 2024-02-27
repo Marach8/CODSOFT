@@ -38,3 +38,5 @@ const questionString = 'question';
 const correctAnswerString = 'correct_answer';
 const incorrectAnswersString = 'incorrect_answers';
 const resultsKey = 'results';
+const loadingString = 'Fetching Questions...';
+const fetchError = "Failed to Fetch 🚫";

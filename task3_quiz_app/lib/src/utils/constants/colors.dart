@@ -7,3 +7,4 @@ const greenColor = Colors.green;
 const tealColor = Colors.teal;
 const blackColor = Colors.black;
 final redColorWithOpacity = redColor.withOpacity(0.1);
+const transparentColor = Colors.transparent;

@@ -45,7 +45,6 @@ Future<Iterable<QuizQuestion>?> getQuizQuestion(String url)async{
         json: questions[index], number: (index + 1).toString()
       )
     );
-    print(jsonData.toString());
     return quizQuestions;
   }
   catch (_){

@@ -38,6 +38,7 @@ dependencies:
   gap: ^3.0.1
   http: ^1.2.1
   provider: ^6.1.1
+  another_flushbar: ^1.12.30
 
 dev_dependencies:
   flutter_test:

@@ -24,7 +24,9 @@ class QuizHome extends StatelessWidget {
           ),
         ),
         body: const HomeBodyWidget(),
-        bottomNavigationBar: const BottomNavBarButton(),
+        bottomNavigationBar: BottomNavBarButton(
+          loadingContext: context,
+        ),
       ),
     );
   }
