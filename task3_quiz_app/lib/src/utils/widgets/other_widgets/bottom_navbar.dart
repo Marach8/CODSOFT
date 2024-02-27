@@ -6,19 +6,22 @@ import 'package:task3_quiz_app/src/utils/constants/colors.dart';
 import 'package:task3_quiz_app/src/utils/constants/fontsizes.dart';
 import 'package:task3_quiz_app/src/utils/constants/fontweights.dart';
 import 'package:task3_quiz_app/src/utils/constants/strings.dart';
+import 'package:task3_quiz_app/src/utils/dialogs/flushbar.dart';
 import 'package:task3_quiz_app/src/utils/extensions.dart';
+import 'package:task3_quiz_app/src/utils/dialogs/loading_screen/loading_screen.dart';
+import 'package:task3_quiz_app/src/views/questiions/questions_view.dart';
 
 class BottomNavBarButton extends StatelessWidget {
-  // final void Function() onPressed;
-
+  final BuildContext loadingContext;
   const BottomNavBarButton({
     super.key,
-    //required this.onPressed
+    required this.loadingContext
   });
 
   @override
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
+    final loadingScreen = LoadingScreen();
 
     return Consumer<QuizManager>(
       builder: (_, quizNotify, __){
@@ -29,9 +32,25 @@ class BottomNavBarButton extends StatelessWidget {
           child: ElevatedButton(
             onPressed: activate ?
             () async{
+              loadingScreen.showOverlay(loadingContext, loadingString);
               final url = quizNotify.organizeQuery();
-              print(url);
-              await getQuizQuestion(url);
+              await getQuizQuestion(url).then(
+                (questions) async{
+                  if(questions == null){
+                    loadingScreen.hideOverlay();
+                    await showFlushbar(
+                      context,
+                      fetchError
+                    );
+                  }
+
+                  else{
+                    quizNotify.retrievedQuestions = questions;
+                    loadingScreen.hideOverlay();
+                    await commenceQuiz(context: loadingContext);
+                  }
+                }
+              );
             } : null,
             
             style: ButtonStyle(

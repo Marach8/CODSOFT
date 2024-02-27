@@ -5,7 +5,7 @@ class QuizQuestion{
   final String questionNumber,
   question,
   correctAnswer;
-  final List<String> incorectAnswers;
+  final List<dynamic> incorectAnswers;
 
   QuizQuestion({
     required this.questionNumber, 
