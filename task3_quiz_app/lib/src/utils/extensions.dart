@@ -33,6 +33,14 @@ extension ModifyBorder on Border{
 }
 
 
+// extension CheckDuplicates<T> on List<T>{
+//   List<T> checkDuplicates(){
+//     for(final item in this){
+
+//     }
+//   }
+// }
+
 extension OrganizeQuery on List<String>{
   String organizeQuery(){
     for(var i = 1; i < length; i++){

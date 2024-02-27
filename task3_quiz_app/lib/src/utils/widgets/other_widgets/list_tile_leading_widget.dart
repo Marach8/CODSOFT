@@ -17,20 +17,20 @@ class ListTileLeadingWidget extends StatelessWidget {
     return ClipRRect(
       borderRadius: BorderRadius.circular(15),
       child: Container(
-        height: 15,
-        width: 15,
+        height: 20,
+        width: 20,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(15),
           border: Border.all(
-            color: greenColor,
+            color: redColor,
             width: 0.5,
           )
         ),
         child: Center(
           child: Text(listIndex).decorateWithGoogleFont(
             redColor,
-            fontWeight9,
-            fontSize1
+            fontWeight7,
+            fontSize2
           ),
         )
       ),
