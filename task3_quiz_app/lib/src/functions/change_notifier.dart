@@ -18,7 +18,7 @@ class QuizManager extends ChangeNotifier{
   
   Iterable<QuizQuestion>? retrievedQuestions;
 
-  List<String> listOfSelectedOptions = [];
+  List<String>? listOfSelectedOptions;
   List<String> listOfCorrectOptions = [];
 
   String? selectedOption;

@@ -5,6 +5,7 @@ import 'package:task3_quiz_app/src/functions/change_notifier.dart';
 import 'package:task3_quiz_app/src/utils/constants/colors.dart';
 import 'package:task3_quiz_app/src/utils/constants/fontsizes.dart';
 import 'package:task3_quiz_app/src/utils/constants/fontweights.dart';
+import 'package:task3_quiz_app/src/utils/constants/strings.dart';
 import 'package:task3_quiz_app/src/utils/extensions.dart';
 import 'package:task3_quiz_app/src/utils/widgets/other_widgets/elevatedbutton_widget.dart';
 import 'package:task3_quiz_app/src/utils/widgets/other_widgets/list_tile_leading_widget.dart';
@@ -19,9 +20,14 @@ class QuestionsRender extends StatelessWidget {
   Widget build(BuildContext context) {
     final quizNotify = Provider.of<QuizManager>(context, listen: false);
     final quizQuestions = quizNotify.retrievedQuestions!;
-    final selectedOptions = quizNotify.listOfSelectedOptions;
+    var selectedOptions = quizNotify.listOfSelectedOptions;
     final correctOptions = quizNotify.listOfCorrectOptions;
     final pageController = quizNotify.pageController;
+    final listOfNull = Iterable.generate(
+      quizQuestions.length,
+      (index) => emptyString
+    );
+    selectedOptions = listOfNull.toList();
 
     return Padding(
       padding: const EdgeInsets.all(15),
@@ -56,10 +62,10 @@ class QuestionsRender extends StatelessWidget {
                 final question = questionData.question;
                 final questionNumber = questionData.questionNumber;
                 final correctAnswer = questionData.correctAnswer;
-                // correctOptions.checkAndInsert(pageIndex, correctAnswer);
+                correctOptions.checkAndInsert(pageIndex, correctAnswer);
                 options..add(correctAnswer)..shuffle(); 
                 final uniqueOptions = Set.from(options);
-                // marach.log('this is correctOptions $correctOptions');
+                marach.log('correctOptions $correctOptions');
       
                 return Card(
                   child: ListTile(
@@ -84,15 +90,13 @@ class QuestionsRender extends StatelessWidget {
                                 Consumer<QuizManager>(
                                   builder: (_, quiz, __) => Radio<String>(
                                     value: option,
-                                    groupValue: quiz.selectedOption,
+                                    groupValue: selectedOptions?.elementAt(pageIndex),
                                     onChanged: (value){
                                       quiz.callToAction(() {
-                                        quiz.selectedOption = value;
-                                        // if(value != null){
-                                        //   selectedOptions.checkAndInsert(pageIndex, value);
-                                        // }
+                                        final optionValue = value ?? emptyString;
+                                        selectedOptions?.checkAndInsert(pageIndex, optionValue);
                                       });
-                                      //marach.log(selectedOptions.toString());
+                                      marach.log(selectedOptions.toString());
                                     },
                                     activeColor: greenColor,
                                     toggleable: true,

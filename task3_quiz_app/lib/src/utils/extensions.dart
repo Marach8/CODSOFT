@@ -33,16 +33,11 @@ extension ModifyBorder on Border{
 }
 
 
-extension CheckAndInsertCorrectOption on List<String>{
-  void checkAndInsert(int index, String string){
+extension CheckAndInsertCorrectOption on List<String?>{
+  void checkAndInsert(int index, String? string){
     final item = elementAtOrNull(index);
-    if(item == null){
-      add(string);
-    }
-    else {
-      remove(item);
-      insert(index, string);
-    }
+    remove(item);
+    insert(index, string);
   }
 }
 
