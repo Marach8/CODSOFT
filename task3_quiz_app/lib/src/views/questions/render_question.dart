@@ -19,6 +19,8 @@ class QuestionsRender extends StatelessWidget {
   Widget build(BuildContext context) {
     final quizNotify = Provider.of<QuizManager>(context, listen: false);
     final quizQuestions = quizNotify.retrievedQuestions!;
+    final selectedOptions = quizNotify.listOfSelectedOptions;
+    final correctOptions = quizNotify.listOfCorrectOptions;
     final pageController = quizNotify.pageController;
 
     return Padding(
@@ -38,39 +40,26 @@ class QuestionsRender extends StatelessWidget {
               controller: pageController,
               allowImplicitScrolling: true,
               onPageChanged: (pageIndex){
-                if(pageIndex > 0){
-                  quizNotify.callToAction(
-                    () => quizNotify.atBeginingOfPage = false
-                  );
-                }
-                else{
-                  quizNotify.callToAction(
-                    () => quizNotify.atBeginingOfPage = true
-                  );
-                }
-
-                if(pageIndex == quizQuestions.length - 1){
-                  quizNotify.callToAction(
-                    () => quizNotify.atEndOfPage = true
-                  );
-                } 
-                else{
-                  quizNotify.callToAction(
-                    () => quizNotify.atEndOfPage = false
-                  );
-                }
+                pageIndex.checkForStartOrEnd(
+                  context: context,
+                  numberOfQuestions: quizQuestions.length
+                );
+                // quizNotify.callToAction(
+                //   () {correctOptions?.checkAndInsert(pageIndex, correctAnswer);
+                // });
               },
               itemCount: quizQuestions.length,
               itemBuilder: (context, pageIndex){
-      
+                
                 final questionData = quizQuestions.elementAt(pageIndex);
                 final options = questionData.incorectAnswers;
                 final question = questionData.question;
                 final questionNumber = questionData.questionNumber;
                 final correctAnswer = questionData.correctAnswer;
+                // correctOptions.checkAndInsert(pageIndex, correctAnswer);
                 options..add(correctAnswer)..shuffle(); 
                 final uniqueOptions = Set.from(options);
-                marach.log(correctAnswer);
+                // marach.log('this is correctOptions $correctOptions');
       
                 return Card(
                   child: ListTile(
@@ -97,7 +86,13 @@ class QuestionsRender extends StatelessWidget {
                                     value: option,
                                     groupValue: quiz.selectedOption,
                                     onChanged: (value){
-                                      quiz.callToAction(() => quiz.selectedOption = value);
+                                      quiz.callToAction(() {
+                                        quiz.selectedOption = value;
+                                        // if(value != null){
+                                        //   selectedOptions.checkAndInsert(pageIndex, value);
+                                        // }
+                                      });
+                                      //marach.log(selectedOptions.toString());
                                     },
                                     activeColor: greenColor,
                                     toggleable: true,

@@ -9,7 +9,7 @@ import 'package:task3_quiz_app/src/utils/constants/strings.dart';
 import 'package:task3_quiz_app/src/utils/dialogs/flushbar.dart';
 import 'package:task3_quiz_app/src/utils/extensions.dart';
 import 'package:task3_quiz_app/src/utils/dialogs/loading_screen/loading_screen.dart';
-import 'package:task3_quiz_app/src/views/questiions/questions_view.dart';
+import 'package:task3_quiz_app/src/views/questions/questions_view.dart';
 
 class BottomNavBarButton extends StatelessWidget {
   final BuildContext loadingContext;

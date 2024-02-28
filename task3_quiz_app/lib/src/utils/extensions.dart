@@ -33,13 +33,64 @@ extension ModifyBorder on Border{
 }
 
 
-// extension CheckDuplicates<T> on List<T>{
-//   List<T> checkDuplicates(){
-//     for(final item in this){
+extension CheckAndInsertCorrectOption on List<String>{
+  void checkAndInsert(int index, String string){
+    final item = elementAtOrNull(index);
+    if(item == null){
+      add(string);
+    }
+    else {
+      remove(item);
+      insert(index, string);
+    }
+  }
+}
 
+
+// extension ComputeResult on Set<String>{
+//   int computeResult(Set<String> selectedOptions){
+//     String result;
+
+//     for(final i in this){
+//       for (final j in selectedOptions){
+//         selectedOptions.
+//       }
 //     }
 //   }
 // }
+
+
+extension CheckForStartOrEnd on int{
+  void checkForStartOrEnd({
+    required BuildContext context,
+    required int numberOfQuestions
+  }){
+    final quizNotify = Provider.of<QuizManager>(context, listen: false);
+
+    if(this > 0){
+      quizNotify.callToAction(
+        () => quizNotify.atBeginingOfPage = false
+      );
+    }
+    else{
+      quizNotify.callToAction(
+        () => quizNotify.atBeginingOfPage = true
+      );
+    }
+
+    if(this == numberOfQuestions - 1){
+      quizNotify.callToAction(
+        () => quizNotify.atEndOfPage = true
+      );
+    } 
+    else{
+      quizNotify.callToAction(
+        () => quizNotify.atEndOfPage = false
+      );
+    }
+  }
+}
+
 
 extension OrganizeQuery on List<String>{
   String organizeQuery(){

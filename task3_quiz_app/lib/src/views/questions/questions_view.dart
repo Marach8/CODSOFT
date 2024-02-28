@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:task3_quiz_app/src/utils/constants/colors.dart';
-import 'package:task3_quiz_app/src/views/questiions/render_question.dart';
+import 'package:task3_quiz_app/src/views/questions/render_question.dart';
 
 Future<void> commenceQuiz({
   required BuildContext context
