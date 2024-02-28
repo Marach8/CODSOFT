@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:gap/gap.dart';
 import 'package:provider/provider.dart';
 import 'package:task3_quiz_app/src/functions/change_notifier.dart';
 import 'package:task3_quiz_app/src/utils/constants/colors.dart';
@@ -8,7 +7,6 @@ import 'package:task3_quiz_app/src/utils/constants/fontweights.dart';
 import 'package:task3_quiz_app/src/utils/constants/strings.dart';
 import 'package:task3_quiz_app/src/utils/extensions.dart';
 import 'package:task3_quiz_app/src/utils/widgets/other_widgets/list_tile_leading_widget.dart';
-import 'dart:developer' as marach show log;
 import 'package:task3_quiz_app/src/views/questions/bottom_buttons_row.dart';
 
 
@@ -64,7 +62,6 @@ class QuestionsRender extends StatelessWidget {
                 correctOptions.insertItem(pageIndex, correctAnswer);
                 options..add(correctAnswer)..shuffle(); 
                 final uniqueOptions = Set.from(options);
-                marach.log('correctOptions $correctOptions');
       
                 return Card(
                   child: ListTile(
@@ -99,7 +96,6 @@ class QuestionsRender extends StatelessWidget {
                                         selectedOptions.insertItem(pageIndex, optionValue);
                                         quiz.listOfSelectedOptions = selectedOptions;
                                       });
-                                      marach.log(selectedOptions.toString());
                                     },
                                     activeColor: greenColor,
                                     toggleable: true,

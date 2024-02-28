@@ -18,27 +18,15 @@ class QuizManager extends ChangeNotifier{
   
   Iterable<QuizQuestion>? retrievedQuestions;
 
-  List<String>? listOfSelectedOptions;
+  List<String> listOfSelectedOptions = [];
   List<String> listOfCorrectOptions = [];
 
   int? get totalQuestions => retrievedQuestions?.length;
-  int? get answeredQuestions => listOfSelectedOptions?.where(
+  int? get answeredQuestions => listOfSelectedOptions.where(
       (selectedOption) => selectedOption != emptyString
     ).length;
 
   bool get allQuestionsTaken => totalQuestions == answeredQuestions;
-
-  List<String> generateList() => 
-    Iterable.generate(
-      totalQuestions ?? 0,
-      (_) => emptyString
-    ).toList();
-
-  // listOfStrings = Iterable.generate(
-  //     totalQuestions,
-  //     (index) => emptyString
-  //   );
-  //   selectedOptions = listOfStrings.toList();
 
   
   String? category,
@@ -65,6 +53,23 @@ class QuizManager extends ChangeNotifier{
     ].organizeQuery();
   }
 
+  double computeResult(){
+    int score = 0;
+
+    for (final i in listOfCorrectOptions){
+      if((listOfSelectedOptions).contains(i)){
+        score++;
+      }
+    }
+    return (score/totalQuestions!) * 100;
+  }
+
+
+  List<String> generateList() => 
+    Iterable.generate(
+      totalQuestions ?? 0,
+      (_) => emptyString
+    ).toList();
 
   void callToAction(void Function() action){
     action();

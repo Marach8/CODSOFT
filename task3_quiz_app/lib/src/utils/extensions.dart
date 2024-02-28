@@ -42,19 +42,6 @@ extension InsertSelectedOption on List<String?>{
 }
 
 
-// extension ComputeResult on Set<String>{
-//   int computeResult(Set<String> selectedOptions){
-//     String result;
-
-//     for(final i in this){
-//       for (final j in selectedOptions){
-//         selectedOptions.
-//       }
-//     }
-//   }
-// }
-
-
 extension CheckForStartOrEnd on int{
   void checkForStartOrEnd({
     required BuildContext context,

@@ -45,3 +45,4 @@ const nextString = 'Next';
 const submitString = 'Submit';
 const slashString = '/';
 const answeredString = ' answered';
+const youScored = 'You Scored ';

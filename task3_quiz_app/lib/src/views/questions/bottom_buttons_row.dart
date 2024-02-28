@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import 'package:task3_quiz_app/src/functions/change_notifier.dart';
 import 'package:task3_quiz_app/src/utils/constants/colors.dart';
 import 'package:task3_quiz_app/src/utils/constants/strings.dart';
+import 'package:task3_quiz_app/src/utils/dialogs/loading_screen/loading_screen.dart';
 import 'package:task3_quiz_app/src/utils/widgets/other_widgets/elevatedbutton_widget.dart';
 import 'package:task3_quiz_app/src/utils/widgets/other_widgets/empty_container.dart';
 
@@ -19,7 +20,6 @@ class BottomButtonsRow extends StatelessWidget {
   Widget build(BuildContext context) {
     return Consumer<QuizManager>(
       builder: (_, quiz, __) {
-        
         final allQuestionsTaken = quiz.allQuestionsTaken;
         
         return Row(
@@ -49,8 +49,19 @@ class BottomButtonsRow extends StatelessWidget {
                 foregroundColor: allQuestionsTaken ? greenColor : blackColor.withOpacity(0.2), 
                 borderColor: allQuestionsTaken ? greenColor : blackColor.withOpacity(0.1),
                 text: submitString, 
-                function: allQuestionsTaken ? (){
-
+                function: allQuestionsTaken ? () async{
+                  final loadingScreen = LoadingScreen();
+                  final result = quiz.computeResult();
+                  Navigator.pop(context);
+                  loadingScreen.showOverlay(
+                    context, youScored + result.toString()
+                  );
+                  await Future.delayed(const Duration(seconds: 3)).then(
+                    (_){
+                      loadingScreen.hideOverlay();
+                      
+                    }
+                  );                  
                 } : null
               )
             ) 
