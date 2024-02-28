@@ -7,10 +7,9 @@ import 'package:task3_quiz_app/src/utils/constants/fontsizes.dart';
 import 'package:task3_quiz_app/src/utils/constants/fontweights.dart';
 import 'package:task3_quiz_app/src/utils/constants/strings.dart';
 import 'package:task3_quiz_app/src/utils/extensions.dart';
-import 'package:task3_quiz_app/src/utils/widgets/other_widgets/elevatedbutton_widget.dart';
 import 'package:task3_quiz_app/src/utils/widgets/other_widgets/list_tile_leading_widget.dart';
-import 'package:task3_quiz_app/src/utils/widgets/other_widgets/empty_container.dart';
 import 'dart:developer' as marach show log;
+import 'package:task3_quiz_app/src/views/questions/bottom_buttons_row.dart';
 
 
 class QuestionsRender extends StatelessWidget {
@@ -20,14 +19,9 @@ class QuestionsRender extends StatelessWidget {
   Widget build(BuildContext context) {
     final quizNotify = Provider.of<QuizManager>(context, listen: false);
     final quizQuestions = quizNotify.retrievedQuestions!;
-    var selectedOptions = quizNotify.listOfSelectedOptions;
+    var selectedOptions = quizNotify.generateList();
     final correctOptions = quizNotify.listOfCorrectOptions;
     final pageController = quizNotify.pageController;
-    final listOfNull = Iterable.generate(
-      quizQuestions.length,
-      (index) => emptyString
-    );
-    selectedOptions = listOfNull.toList();
 
     return Padding(
       padding: const EdgeInsets.all(15),
@@ -35,12 +29,20 @@ class QuestionsRender extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         mainAxisSize: MainAxisSize.min,
         children: [
-          // const Text('Ongoing Quiz').decorateWithGoogleFont(
-          //   redColor,
-          //   fontWeight7,
-          //   fontSize4
-          // ),
-          const Gap(20),
+          Consumer<QuizManager>(
+            builder: (_, quiz, __) {
+              final answeredQuestions = (quiz.answeredQuestions ?? 0).toString();
+              final totalQuestions = (quiz.totalQuestions).toString();
+              return Text(
+                answeredQuestions + slashString + totalQuestions + answeredString
+              ).decorateWithGoogleFont(
+                quiz.allQuestionsTaken ? greenColor : blackColor,
+                fontWeight4,
+                fontSize2
+              );
+            }
+          ),
+          //const Gap(5),
           Expanded(
             child: PageView.builder(
               controller: pageController,
@@ -50,9 +52,6 @@ class QuestionsRender extends StatelessWidget {
                   context: context,
                   numberOfQuestions: quizQuestions.length
                 );
-                // quizNotify.callToAction(
-                //   () {correctOptions?.checkAndInsert(pageIndex, correctAnswer);
-                // });
               },
               itemCount: quizQuestions.length,
               itemBuilder: (context, pageIndex){
@@ -62,7 +61,7 @@ class QuestionsRender extends StatelessWidget {
                 final question = questionData.question;
                 final questionNumber = questionData.questionNumber;
                 final correctAnswer = questionData.correctAnswer;
-                correctOptions.checkAndInsert(pageIndex, correctAnswer);
+                correctOptions.insertItem(pageIndex, correctAnswer);
                 options..add(correctAnswer)..shuffle(); 
                 final uniqueOptions = Set.from(options);
                 marach.log('correctOptions $correctOptions');
@@ -71,7 +70,10 @@ class QuestionsRender extends StatelessWidget {
                   child: ListTile(
                     contentPadding: const EdgeInsets.all(10),
                     isThreeLine: true,
-                    leading: ListTileLeadingWidget(listIndex: questionNumber),
+                    leading: ListTileLeadingWidget(
+                      listIndex: questionNumber,
+                      radius: 20,
+                    ),
                     minLeadingWidth: 0,
                     title: Text(question).decorateWithGoogleFont(
                       blackColor,
@@ -90,11 +92,12 @@ class QuestionsRender extends StatelessWidget {
                                 Consumer<QuizManager>(
                                   builder: (_, quiz, __) => Radio<String>(
                                     value: option,
-                                    groupValue: selectedOptions?.elementAt(pageIndex),
+                                    groupValue: selectedOptions.elementAt(pageIndex),
                                     onChanged: (value){
                                       quiz.callToAction(() {
                                         final optionValue = value ?? emptyString;
-                                        selectedOptions?.checkAndInsert(pageIndex, optionValue);
+                                        selectedOptions.insertItem(pageIndex, optionValue);
+                                        quiz.listOfSelectedOptions = selectedOptions;
                                       });
                                       marach.log(selectedOptions.toString());
                                     },
@@ -120,45 +123,7 @@ class QuestionsRender extends StatelessWidget {
               }
             ),
           ),
-          Consumer<QuizManager>(
-            builder: (_, quiz, __) => Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              mainAxisSize: MainAxisSize.max,
-              children: [
-                quiz.atBeginingOfPage ? emptySizedBox : Expanded(
-                  flex: 1,
-                  child: ElevatedButtonWidget(
-                    backgroundColor: whiteColor, 
-                    foregroundColor: redColor,
-                    borderColor: redColor, 
-                    text: 'Previous', 
-                    function: () async{
-                      await pageController.previousPage(
-                        duration: const Duration(seconds: 1), 
-                        curve: Curves.decelerate
-                      );
-                    }
-                  ),
-                ),
-                const Gap(10),
-                quiz.atEndOfPage ? emptySizedBox : Expanded(
-                  flex: 1,
-                  child: ElevatedButtonWidget(
-                    backgroundColor: whiteColor,
-                    foregroundColor: redColor, 
-                    borderColor: redColor, 
-                    text: 'Next', 
-                    function: () async{
-                      await pageController.nextPage(
-                        duration: const Duration(seconds: 1), 
-                        curve: Curves.decelerate
-                      );
-                    }
-                  ),
-                )
-              ],
-            ),
-          )
+          BottomButtonsRow(pageController: pageController)
         ],
       ),
     );

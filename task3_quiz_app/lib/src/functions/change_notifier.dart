@@ -21,7 +21,25 @@ class QuizManager extends ChangeNotifier{
   List<String>? listOfSelectedOptions;
   List<String> listOfCorrectOptions = [];
 
-  String? selectedOption;
+  int? get totalQuestions => retrievedQuestions?.length;
+  int? get answeredQuestions => listOfSelectedOptions?.where(
+      (selectedOption) => selectedOption != emptyString
+    ).length;
+
+  bool get allQuestionsTaken => totalQuestions == answeredQuestions;
+
+  List<String> generateList() => 
+    Iterable.generate(
+      totalQuestions ?? 0,
+      (_) => emptyString
+    ).toList();
+
+  // listOfStrings = Iterable.generate(
+  //     totalQuestions,
+  //     (index) => emptyString
+  //   );
+  //   selectedOptions = listOfStrings.toList();
+
   
   String? category,
   typeSubCategory,
