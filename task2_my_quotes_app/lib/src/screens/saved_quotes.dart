@@ -8,7 +8,7 @@ import 'package:task2_my_quotes_app/src/utils/fontsizes.dart';
 import 'package:task2_my_quotes_app/src/utils/fontweights.dart';
 import 'package:task2_my_quotes_app/src/utils/maps.dart';
 import 'package:task2_my_quotes_app/src/utils/strings.dart';
-import 'package:task2_my_quotes_app/src/views/list_tile_leading_widget.dart';
+import 'package:task2_my_quotes_app/src/screens/list_tile_leading_widget.dart';
 import 'package:task2_my_quotes_app/src/widgets/dismissible_background.dart';
 
 

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:task2_my_quotes_app/src/utils/colors.dart';
-import 'package:task2_my_quotes_app/src/views/home_view.dart';
+import 'package:task2_my_quotes_app/src/screens/home_screen.dart';
 
 void main() {
   runApp(const MyApp());

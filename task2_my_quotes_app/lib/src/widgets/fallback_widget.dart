@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:task2_my_quotes_app/src/functions/helper_functions.dart';
 import 'package:task2_my_quotes_app/src/utils/colors.dart';
 import 'package:task2_my_quotes_app/src/utils/extensions.dart';
 import 'package:task2_my_quotes_app/src/utils/fontsizes.dart';
@@ -10,16 +11,15 @@ class FallBackWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final screenWidth = MediaQuery.of(context).size.width;
-    final screenHeight = MediaQuery.of(context).size.height;
-
-    return Expanded(
+    return SizedBox(
+      height: screenHeight(context),
+      width: screenWidth(context),
       child: Stack(
         children: [
           Image.asset(
             imageFilePath,
-            height: screenHeight,
-            width: screenWidth,
+            height: screenHeight(context),
+            width: screenWidth(context),
             fit: BoxFit.cover
           ),
           Padding(

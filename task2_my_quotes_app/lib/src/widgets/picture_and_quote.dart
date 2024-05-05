@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart' show Uint8List;
 import 'package:flutter/material.dart';
+import 'package:task2_my_quotes_app/src/functions/helper_functions.dart';
 import 'package:task2_my_quotes_app/src/widgets/render_quote.dart';
 
 class PictureAndQuoteWidget extends StatelessWidget {
@@ -14,16 +15,15 @@ class PictureAndQuoteWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final screenWidth = MediaQuery.of(context).size.width;
-    final screenHeight = MediaQuery.of(context).size.height;
-
-    return Expanded(
+    return SizedBox(
+      height: screenHeight(context),
+      width: screenWidth(context),
       child: Stack(
         children: [
           Image.memory(
             imageData,
-            height: screenHeight,
-            width: screenWidth,
+            height: screenHeight(context),
+            width: screenWidth(context),
             fit: BoxFit.cover
           ),
           QuoteRenderWidget(quoteList: quoteList)

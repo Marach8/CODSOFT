@@ -16,7 +16,7 @@ extension ModifyText on Text{
       color: color
     ),
     overflow: controlOverflow ?? false ? TextOverflow.ellipsis : null,
-    softWrap: true,   
+    softWrap: true,
   );
 }
 

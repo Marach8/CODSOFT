@@ -31,7 +31,7 @@ class BottomNavButtons extends StatelessWidget {
         NavBarButtonColumn(
           icon: FontAwesomeIcons.share, 
           function: () {},
-          title: shareQuote
+          title: shareQuoteString
         ),
         NavBarButtonColumn(
           icon: FontAwesomeIcons.bookOpenReader, 
