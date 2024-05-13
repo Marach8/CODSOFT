@@ -1,5 +1,3 @@
-import 'dart:ffi';
-
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:task2_my_quotes_app/src/utils/strings.dart';
 
@@ -9,35 +7,35 @@ class LocalDatabase{
   factory LocalDatabase() => _shared;
 
 
-  Future<SharedPreferences> preferences() async
+  Future<SharedPreferences> getPreference() async
     => await SharedPreferences.getInstance();
 
   Future<bool> setTemporaryQuote(List<String> tempQuote) async 
-    => await preferences().then(
+    => await getPreference().then(
       (prefs) => prefs.setStringList(tempQuoteString, tempQuote)
     );
 
 
   Future<List<String>?> getTemporaryQuote() async 
-    => await preferences().then(
+    => await getPreference().then(
       (prefs) => prefs.getStringList(tempQuoteString)
     );
  
 
   Future<bool> _setNumberOfSavedQuotes(int numberOfQuotes) async 
-    => await preferences().then(
+    => await getPreference().then(
       (prefs) => prefs.setInt(lengthOfQuotes, numberOfQuotes)
     );
 
 
   Future<int?> _getNumberOfSavedQuotes() async 
-    => await preferences().then(
+    => await getPreference().then(
       (prefs) => prefs.getInt(lengthOfQuotes)
     );
 
 
   Future<bool> setQuoteItem(List<String> quoteList) async 
-    => await preferences().then(
+    => await getPreference().then(
       (prefs) async{
         final numberOfQuotes = await _getNumberOfSavedQuotes() ?? 0;
         final newNumberOfQuotes = numberOfQuotes + 1;
@@ -50,7 +48,7 @@ class LocalDatabase{
 
 
   Future<Iterable<List<String>?>> getQuoteItems() async 
-    => await preferences().then(
+    => await getPreference().then(
       (prefs) async{
         final numberOfSavedQuotes = await _getNumberOfSavedQuotes() ?? 0;
         final savedQuotes = Iterable.generate(
@@ -64,7 +62,7 @@ class LocalDatabase{
 
 
     Future<bool> deleteQuote(String keyToDelete) async => 
-      await preferences().then(
+      await getPreference().then(
         (prefs) => prefs.remove(keyToDelete)
       );
 }
