@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:task2_my_quotes_app/src/functions/database.dart';
+import 'package:task2_my_quotes_app/src/services/database_service.dart';
 import 'package:task2_my_quotes_app/src/utils/colors.dart';
 import 'package:task2_my_quotes_app/src/utils/dialogs/flushbar.dart';
 import 'package:task2_my_quotes_app/src/utils/dialogs/generic_dialog.dart';
@@ -8,9 +8,8 @@ import 'package:task2_my_quotes_app/src/utils/fontsizes.dart';
 import 'package:task2_my_quotes_app/src/utils/fontweights.dart';
 import 'package:task2_my_quotes_app/src/utils/maps.dart';
 import 'package:task2_my_quotes_app/src/utils/strings.dart';
-import 'package:task2_my_quotes_app/src/screens/list_tile_leading_widget.dart';
+import 'package:task2_my_quotes_app/src/widgets/list_tile_leading_widget.dart';
 import 'package:task2_my_quotes_app/src/widgets/dismissible_background.dart';
-
 
 class SavedQuotes extends StatelessWidget {
   const SavedQuotes({super.key});
@@ -18,67 +17,60 @@ class SavedQuotes extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final database = LocalDatabase();
-    
+
     return Column(
       children: [
         DrawerHeader(
           child: const Text(favoriteQuotes).decorateWithGoogleFont(
-            whiteColor,
-            fontWeight4,
-            fontSize4
+            whiteColor, fontWeight4, fontSize4
           ),
         ),
         Expanded(
           child: FutureBuilder<Iterable<List<String>?>>(
             future: database.getQuoteItems(),
             builder: (context, snapshot) {
-              if(snapshot.connectionState == ConnectionState.done){
-                if(snapshot.hasData && snapshot.data!.isNotEmpty){
+              if (snapshot.connectionState == ConnectionState.done) {
+                if (snapshot.hasData && snapshot.data!.isNotEmpty) {
+
                   final indexedIterable = snapshot.data!.indexed;
+
                   return ListView(
                     children: indexedIterable.map(
                       (quoteItem) => Dismissible(
                         key: UniqueKey(),
                         confirmDismiss: (_) async {
                           return showGenericDialog<bool>(
-                            context: context, 
-                            title: deleteQuote, 
-                            content: confirmDeleteQuote, 
-                            options: deleteQuoteMap
-                          );
+                            context: context,
+                            title: deleteQuote,
+                            content: confirmDeleteQuote,
+                            options: deleteQuoteMap);
                         },
-                        onDismissed: (direction) async{
-                          if(
-                            direction == DismissDirection.endToStart || 
+                        onDismissed: (direction) async {
+                          if (direction == DismissDirection.endToStart || 
                             direction == DismissDirection.startToEnd
-                          ){
-                            await database.deleteQuote(quoteItem.$2!.last)
-                              .then((_)async{
-                                await showFlushbar(context, quoteDeleted);
-                              });
+                          ) {
+                            await database.deleteQuote(quoteItem.$2!.last).then(
+                              (_) async => await showFlushbar(context, quoteDeleted)
+                            );
                           }
                         },
                         background: const BackgroundOfDissmissible(),
                         child: Card(
-                          margin: const EdgeInsets.fromLTRB(10, 3, 10, 3),
+                          margin:
+                              const EdgeInsets.fromLTRB(10, 3, 10, 3),
                           color: whiteColor.withOpacity(0.2),
                           child: ListTile(
                             minLeadingWidth: 0,
-                            leading: ListTileLeadingWidget(
-                              listIndex: (quoteItem.$1 + 1).toString()
-                            ),
+                            leading: ListTileLeadingWidget(listIndex:(quoteItem.$1 + 1).toString()),
                             title: Text(quoteItem.$2!.first).decorateWithGoogleFont(
-                              whiteColor, 
+                              whiteColor,
                               fontWeight3,
                               fontSize2,
                             ),
-                            
                             subtitle: Padding(
-                              padding: const EdgeInsets.only(top:3),
-                              child: Text(
-                                dashString + quoteItem.$2![1] + dashString
-                              ).decorateWithGoogleFont(
-                                whiteColor, 
+                              padding: const EdgeInsets.only(top: 3),
+                              child: Text(dashString + quoteItem.$2![1] + dashString).decorateWithGoogleFont(
+                                whiteColor,
                                 fontWeight7,
                                 fontSize1,
                               ),
@@ -88,27 +80,21 @@ class SavedQuotes extends StatelessWidget {
                       )
                     ).toList()
                   );
-                }
-          
-                else{
+                } 
+                else {
                   return Padding(
                     padding: const EdgeInsets.all(20),
                     child: Center(
                       child: const Text(noSavedQuotes).decorateWithGoogleFont(
-                        whiteColor, 
-                        fontWeight2, 
-                        fontSize3
+                        whiteColor, fontWeight2, fontSize3
                       ),
                     ),
                   );
                 }
-              }
-              
-              else{
+              } 
+              else {
                 return const Center(
-                  child: CircularProgressIndicator(
-                    color: whiteColor,
-                  ),
+                  child: CircularProgressIndicator(color: whiteColor),
                 );
               }
             }
@@ -118,6 +104,3 @@ class SavedQuotes extends StatelessWidget {
     );
   }
 }
-
-
-

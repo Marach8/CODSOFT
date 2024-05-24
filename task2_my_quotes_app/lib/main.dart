@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:task2_my_quotes_app/src/utils/colors.dart';
-import 'package:task2_my_quotes_app/src/screens/home_screen.dart';
+import 'package:task2_my_quotes_app/src/views/home_view.dart';
 
-void main() {
-  runApp(const MyApp());
-}
+void main() => runApp(const MyApp());
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});

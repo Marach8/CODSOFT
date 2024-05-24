@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:task2_my_quotes_app/src/functions/database.dart';
+import 'package:task2_my_quotes_app/src/services/database_service.dart';
 import 'package:task2_my_quotes_app/src/utils/dialogs/flushbar.dart';
 import 'package:task2_my_quotes_app/src/utils/dialogs/generic_dialog.dart';
 import 'package:task2_my_quotes_app/src/utils/dialogs/loading_screen/loading_screen.dart';

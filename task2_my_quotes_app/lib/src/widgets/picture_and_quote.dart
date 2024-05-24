@@ -1,6 +1,6 @@
 import 'package:flutter/foundation.dart' show Uint8List;
 import 'package:flutter/material.dart';
-import 'package:task2_my_quotes_app/src/functions/helper_functions.dart';
+import 'package:task2_my_quotes_app/src/services/helper_functions.dart';
 import 'package:task2_my_quotes_app/src/widgets/render_quote.dart';
 
 class PictureAndQuoteWidget extends StatelessWidget {

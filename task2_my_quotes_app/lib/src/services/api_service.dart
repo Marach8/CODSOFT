@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'package:flutter/services.dart' show Uint8List;
 import 'package:http/http.dart' as http;
-import 'package:task2_my_quotes_app/src/functions/database.dart';
+import 'package:task2_my_quotes_app/src/services/database_service.dart';
 import 'package:task2_my_quotes_app/src/utils/strings.dart';
 
 

@@ -1,6 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:task2_my_quotes_app/src/functions/database.dart';
+import 'package:task2_my_quotes_app/src/services/database_service.dart';
 
 void main(){
 
