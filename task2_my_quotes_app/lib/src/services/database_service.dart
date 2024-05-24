@@ -10,15 +10,15 @@ class LocalDatabase{
   Future<SharedPreferences> getPreference() async
     => await SharedPreferences.getInstance();
 
-  Future<bool> setTemporaryQuote(List<String> tempQuote) async 
+  Future<void> setTemporaryQuote(List<String> tempQuote) async 
     => await getPreference().then(
-      (prefs) => prefs.setStringList(tempQuoteString, tempQuote)
+      (prefs) => prefs.setStringList(tempQuoteKey, tempQuote)
     );
 
 
   Future<List<String>?> getTemporaryQuote() async 
     => await getPreference().then(
-      (prefs) => prefs.getStringList(tempQuoteString)
+      (prefs) => prefs.getStringList(tempQuoteKey)
     );
  
 

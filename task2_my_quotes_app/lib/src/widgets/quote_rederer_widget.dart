@@ -6,10 +6,10 @@ import 'package:task2_my_quotes_app/src/utils/fontsizes.dart';
 import 'package:task2_my_quotes_app/src/utils/fontweights.dart';
 import 'package:task2_my_quotes_app/src/utils/strings.dart';
 
-class QuoteRenderWidget extends StatelessWidget {
+class QuoteRendererWidget extends StatelessWidget {
   final List<String> quoteList;
 
-  const QuoteRenderWidget({
+  const QuoteRendererWidget({
     super.key,
     required this.quoteList
   });

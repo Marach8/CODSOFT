@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:task2_my_quotes_app/src/utils/strings.dart';
 
-extension ModifyText on Text{
+extension DecorateText on Text{
   Text decorateWithGoogleFont(
     Color color, 
     FontWeight fontWeight,

@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:task2_my_quotes_app/src/services/button_functions.dart';
+import 'package:task2_my_quotes_app/src/controllers/save_quote_controller.dart';
+import 'package:task2_my_quotes_app/src/controllers/share_quote_controller.dart';
 import 'package:task2_my_quotes_app/src/utils/strings.dart';
-import 'package:task2_my_quotes_app/src/widgets/nav_bar/custom_nav_bar_button_column.dart';
+import 'package:task2_my_quotes_app/src/widgets/nav_bar_widgets/custom_nav_bar_button_column.dart';
 
 class BottomNavButtons extends StatelessWidget {
   final void Function() refresh;
@@ -30,7 +31,7 @@ class BottomNavButtons extends StatelessWidget {
         ),
         NavBarButtonColumn(
           icon: FontAwesomeIcons.share, 
-          function: () {},
+          function: () async => await shareQuote(context: context),
           title: shareQuoteString
         ),
         NavBarButtonColumn(

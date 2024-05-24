@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:task2_my_quotes_app/src/services/helper_functions.dart';
+import 'package:task2_my_quotes_app/src/utils/helper_functions.dart';
 import 'package:task2_my_quotes_app/src/utils/colors.dart';
 import 'package:task2_my_quotes_app/src/utils/extensions.dart';
 import 'package:task2_my_quotes_app/src/utils/fontsizes.dart';

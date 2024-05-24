@@ -1,7 +1,7 @@
 import 'package:flutter/foundation.dart' show Uint8List;
 import 'package:flutter/material.dart';
-import 'package:task2_my_quotes_app/src/services/helper_functions.dart';
-import 'package:task2_my_quotes_app/src/widgets/render_quote.dart';
+import 'package:task2_my_quotes_app/src/utils/helper_functions.dart';
+import 'package:task2_my_quotes_app/src/widgets/quote_rederer_widget.dart';
 
 class PictureAndQuoteWidget extends StatelessWidget {
   final Uint8List imageData;
@@ -26,7 +26,7 @@ class PictureAndQuoteWidget extends StatelessWidget {
             width: screenWidth(context),
             fit: BoxFit.cover
           ),
-          QuoteRenderWidget(quoteList: quoteList)
+          QuoteRendererWidget(quoteList: quoteList)
         ],
       )
     );

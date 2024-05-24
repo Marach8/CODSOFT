@@ -33,8 +33,8 @@ Future<List<String>?> getRandomQuote() async{
 
     if(response.statusCode == 200){
       final data = jsonDecode(response.body);
-      final quote = data[0][quotesKey];
-      final author = data[0][authorKey];
+      final String quote = data[0][quotesKey];
+      final String author = data[0][authorKey];
       await LocalDatabase().setTemporaryQuote([quote, author]);
       return [quote, author];
     }

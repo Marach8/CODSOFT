@@ -40,7 +40,7 @@ Future<void> saveQuote({
             else{
               loadingScreen.hideOverlay();
               await Future.delayed(Duration.zero).then(
-                (_) async => await showFlushbar(context, quoteExists)
+                (_) async => await showFlushbar(context, quoteAlreadySaved)
               );
             }
             
