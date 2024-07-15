@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:task2_my_quotes_app/src/controllers/share_quote_controller.dart';
 import 'package:task2_my_quotes_app/src/services/local_database_service.dart';
 import 'package:task2_my_quotes_app/src/utils/colors.dart';
 import 'package:task2_my_quotes_app/src/utils/dialogs/flushbar.dart';
@@ -43,7 +44,8 @@ class SavedQuotes extends StatelessWidget {
                             context: context,
                             title: deleteQuote,
                             content: confirmDeleteQuote,
-                            options: deleteQuoteMap);
+                            options: deleteQuoteMap
+                          );
                         },
                         onDismissed: (direction) async {
                           if (direction == DismissDirection.endToStart || 
@@ -56,10 +58,10 @@ class SavedQuotes extends StatelessWidget {
                         },
                         background: const BackgroundOfDissmissible(),
                         child: Card(
-                          margin:
-                              const EdgeInsets.fromLTRB(10, 3, 10, 3),
+                          margin: const EdgeInsets.fromLTRB(10, 3, 10, 3),
                           color: whiteColor.withOpacity(0.2),
                           child: ListTile(
+                            onTap: () => shareQuote(context: context, quoteToShare: quoteItem.$2),
                             minLeadingWidth: 0,
                             leading: ListTileLeadingWidget(listIndex:(quoteItem.$1 + 1).toString()),
                             title: Text(quoteItem.$2!.first).decorateWithGoogleFont(

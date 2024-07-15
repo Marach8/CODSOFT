@@ -20,7 +20,6 @@ class BottomNavButtons extends StatelessWidget {
     return ValueListenableBuilder(
       valueListenable: isLoading,
       builder: (_, value, __) {
-        print('absorbing: $value');
         return AbsorbPointer(
           absorbing: value,
           child: Row(

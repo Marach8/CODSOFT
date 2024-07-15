@@ -7,7 +7,7 @@ import 'package:task2_my_quotes_app/src/widgets/nav_bar_widgets/bottom_nav_bar.d
 import 'package:task2_my_quotes_app/src/widgets/fallback_widget.dart';
 import 'package:task2_my_quotes_app/src/widgets/loading_screen_widget.dart';
 import 'package:task2_my_quotes_app/src/widgets/picture_and_quote_widget.dart';
-import 'dart:developer' as marach show log;
+
 
 class QuotesHome extends StatefulWidget {
   const QuotesHome({super.key});
@@ -67,8 +67,7 @@ class _QuotesHomeState extends State<QuotesHome> {
         ),
         drawer: Drawer(
           backgroundColor: blackColor.withAlpha(150),
-          child: const SavedQuotes(),
-          
+          child: const SavedQuotes(),          
         ),
         bottomNavigationBar: BottomNavButtons(
           refresh: () => refresh(),
