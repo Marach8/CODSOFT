@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:share_plus/share_plus.dart';
-import 'package:task2_my_quotes_app/src/services/database_service.dart';
+import 'package:task2_my_quotes_app/src/services/local_database_service.dart';
 import 'package:task2_my_quotes_app/src/utils/dialogs/flushbar.dart';
 import 'package:task2_my_quotes_app/src/utils/strings.dart';
 
 Future<void> shareQuote({required BuildContext context}) async{
   try{
-    final quoteAndAuthor = await LocalDatabase().getTemporaryQuote();
+    final quoteAndAuthor = await LocalDatabaseService().getTemporaryQuote();
     if (quoteAndAuthor != null){
       final quote = quoteAndAuthor.first;
       final author = quoteAndAuthor.last;

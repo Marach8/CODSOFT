@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:task2_my_quotes_app/src/services/database_service.dart';
+import 'package:task2_my_quotes_app/src/services/local_database_service.dart';
 import 'package:task2_my_quotes_app/src/utils/dialogs/flushbar.dart';
 import 'package:task2_my_quotes_app/src/utils/dialogs/generic_dialog.dart';
 import 'package:task2_my_quotes_app/src/utils/dialogs/loading_screen/loading_screen.dart';
 import 'package:task2_my_quotes_app/src/utils/maps.dart';
 import 'package:task2_my_quotes_app/src/utils/strings.dart';
 
-final LocalDatabase database = LocalDatabase();
+final LocalDatabaseService database = LocalDatabaseService();
 final LoadingScreen loadingScreen = LoadingScreen();
 
 Future<void> saveQuote({

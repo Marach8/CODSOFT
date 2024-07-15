@@ -1,16 +1,16 @@
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:task2_my_quotes_app/src/utils/strings.dart';
 
-class LocalDatabase{
-  LocalDatabase._sharedInstance(); 
-  static final LocalDatabase _shared = LocalDatabase._sharedInstance();
-  factory LocalDatabase() => _shared;
+class LocalDatabaseService{
+  LocalDatabaseService._sharedInstance(); 
+  static final LocalDatabaseService _shared = LocalDatabaseService._sharedInstance();
+  factory LocalDatabaseService() => _shared;
 
 
   Future<SharedPreferences> getPreference() async
     => await SharedPreferences.getInstance();
 
-  Future<void> setTemporaryQuote(List<String> tempQuote) async 
+  Future<bool> setTemporaryQuote(List<String> tempQuote) async 
     => await getPreference().then(
       (prefs) => prefs.setStringList(tempQuoteKey, tempQuote)
     );

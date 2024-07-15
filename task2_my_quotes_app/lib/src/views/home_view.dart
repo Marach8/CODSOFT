@@ -7,6 +7,7 @@ import 'package:task2_my_quotes_app/src/widgets/nav_bar_widgets/bottom_nav_bar.d
 import 'package:task2_my_quotes_app/src/widgets/fallback_widget.dart';
 import 'package:task2_my_quotes_app/src/widgets/loading_screen_widget.dart';
 import 'package:task2_my_quotes_app/src/widgets/picture_and_quote_widget.dart';
+import 'dart:developer' as marach show log;
 
 class QuotesHome extends StatefulWidget {
   const QuotesHome({super.key});
@@ -16,8 +17,16 @@ class QuotesHome extends StatefulWidget {
 }
 
 class _QuotesHomeState extends State<QuotesHome> {
+
+  ValueNotifier<bool> isLoading = ValueNotifier<bool>(true);
+
+  @override
+  void dispose(){
+    isLoading.dispose();
+    super.dispose();
+  }
   
-  void refresh() => setState((){});
+  void refresh() => setState(() => isLoading.value = true);
 
   @override
   Widget build(BuildContext context) {
@@ -31,31 +40,28 @@ class _QuotesHomeState extends State<QuotesHome> {
         body: Center(
           child: FutureBuilder<dynamic>(
             future: Future.wait<dynamic>([
-              getRandomImage(),
-              getRandomQuote()
-            ]),
+              ApiService.getRandomImage(),
+              ApiService.getRandomQuote()
+            ]).whenComplete(() => isLoading.value = false),
             builder: (_, snapshot){
-              if(snapshot.connectionState == ConnectionState.done){
-                final imageSnapshot = snapshot.data?.first;
-                final quotesSnaphot = snapshot.data?.last;
-          
-                if(imageSnapshot == null || quotesSnaphot == null){
-                  return const FallBackWidget();
-                }
-          
-                else{
-                  return PictureAndQuoteWidget(
-                    imageData: imageSnapshot as Uint8List,
-                    quoteList: quotesSnaphot as List<String>,
-                  );
-                }
-              }
-          
-              else{
-                return BackgroundImageWithOverlayWidget(
-                  context1: context
-                );
-              }
+              final connectionState = snapshot.connectionState;
+              final data = snapshot.data;
+              final isDoneLoading = connectionState == ConnectionState.done;
+              final successfullDataRetreival = data?.first != null && data?.last != null;
+
+              return AnimatedCrossFade(
+                firstChild: const BackgroundImageWithOverlayWidget(),
+                secondChild: successfullDataRetreival ? PictureAndQuoteWidget(
+                    imageData: data.first as Uint8List,
+                    quoteList: data.last as List<String>,
+                  ) :  const FallBackWidget(),
+
+                crossFadeState: isDoneLoading ? CrossFadeState.showSecond : CrossFadeState.showFirst,
+                duration: const Duration(seconds: 2),
+                firstCurve: Curves.decelerate,
+                secondCurve: Curves.decelerate,
+                sizeCurve: Curves.decelerate,
+              );
             }
           ),
         ),
@@ -65,7 +71,8 @@ class _QuotesHomeState extends State<QuotesHome> {
           
         ),
         bottomNavigationBar: BottomNavButtons(
-          refresh: () => refresh()
+          refresh: () => refresh(),
+          isLoading: isLoading,
         ),
         backgroundColor: blackColor.withAlpha(10)
       ),

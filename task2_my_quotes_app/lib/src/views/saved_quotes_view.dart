@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:task2_my_quotes_app/src/services/database_service.dart';
+import 'package:task2_my_quotes_app/src/services/local_database_service.dart';
 import 'package:task2_my_quotes_app/src/utils/colors.dart';
 import 'package:task2_my_quotes_app/src/utils/dialogs/flushbar.dart';
 import 'package:task2_my_quotes_app/src/utils/dialogs/generic_dialog.dart';
@@ -16,7 +16,7 @@ class SavedQuotes extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final database = LocalDatabase();
+    final database = LocalDatabaseService();
 
     return Column(
       children: [
